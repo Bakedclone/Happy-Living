@@ -4,28 +4,34 @@ import ErrorHandler from "../utils/errorHandler.js"
 import { sendEmail } from "../utils/sendEmail.js";
 import { sendToken } from "../utils/sendToken.js";
 import crypto from "crypto";
+import cloudinary from "cloudinary";
+import getDataUri from "../utils/dataUri.js";
 
 export const register = catchAsyncError(async(req, res, next)=> {
 
     const { _id, email, password } = req.body;
+    const file = req.file;
 
-    // const file = req.file;
-
-    if(!_id || !email || !password) 
+    if(!_id || !email || !password || !file) 
         return next(new ErrorHandler("Enter all fields", 400));
 
-    let user;
-    // let user = await Users.findOne({ email });
-    // // user = await Users.findOne({ _id });
+    let user = await Users.findOne({ email });
+    // user = await Users.findOne({ _id });
 
-    // if (user) return next(new ErrorHandler("User already exist", 409));
+    if (user) return next(new ErrorHandler("User already exist", 409));
 
     // Upload file on cloud
+    const fileUri = getDataUri(file);
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
     user = await Users.create({
         _id,
         email,
-        password
+        password,
+        photo: {
+            public_id: mycloud.public_id,
+            url: mycloud.secure_url,
+        }
     })
 
     sendToken(res, user, "Registered Successfully.", 201);
@@ -34,8 +40,6 @@ export const register = catchAsyncError(async(req, res, next)=> {
 export const login = catchAsyncError(async(req, res, next)=> {
 
     const { email, password } = req.body;
-
-    // const file = req.file;
 
     if(!email || !password) 
         return next(new ErrorHandler("Please enter Email and Password", 400));
@@ -115,11 +119,63 @@ export const updateProfile = catchAsyncError(async (req, res, next)=> {
 
 export const updateProfilePicture = catchAsyncError(async (req, res, next)=> {
     
-    // Pending
-
+    const file = req.file;
+    const user = await Users.findById(req.user._id);
+    const fileUri = getDataUri(file);
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+    
+    await cloudinary.v2.uploader.destroy(user.photo.public_id);
+    user.photo = {
+        public_id: mycloud.public_id,
+        url: mycloud.secure_url,
+    }
+    user.save();
     res.status(200).json({
         success: true,
-        message: "Pending"
+        message: "Profile Picture Updated Successfully."
+    });
+})
+
+export const uploadAadharcard = catchAsyncError(async (req, res, next)=> {
+    
+    const file = req.file;
+    const user = await Users.findById(req.user._id);
+    const fileUri = getDataUri(file);
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+    
+    if(user.aadharcard.public_id)
+        await cloudinary.v2.uploader.destroy(user.aadharcard.public_id);
+
+    user.aadharcard = {
+        public_id: mycloud.public_id,
+        url: mycloud.secure_url,
+    }
+    user.save();
+    res.status(200).json({
+        success: true,
+        message: "Aadhar Card Updated Successfully."
+    });
+})
+
+export const uploadPanCard = catchAsyncError(async (req, res, next)=> {
+    
+    const file = req.file;
+    const user = await Users.findById(req.user._id);
+    const fileUri = getDataUri(file);
+    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+    
+    if(user.pancard.public_id)
+        await cloudinary.v2.uploader.destroy(user.aadharcard.public_id);
+
+    user.pancard = {
+        public_id: mycloud.public_id,
+        url: mycloud.secure_url,
+    }
+
+    user.save();
+    res.status(200).json({
+        success: true,
+        message: "Pan Card Updated Successfully."
     });
 })
 

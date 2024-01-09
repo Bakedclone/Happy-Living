@@ -22,7 +22,6 @@ const schema = new mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
-        unique: [true, "Phone number is already in use."],
       },
     password:{
         type:String,
