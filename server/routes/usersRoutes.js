@@ -1,6 +1,6 @@
 import express from "express";
-import { changePassword, forgetPassword, getMyProfile, login, logout, register, resetPassword, updateProfile, updateProfilePicture, uploadAadharcard, uploadPanCard } from "../controllers/userController.js";
-import { isAuthenticated } from "../middlewares/auth.js";
+import { changePassword, deleteMyProfile, deleteUser, forgetPassword, getAllUsers, getMyProfile, login, logout, register, resetPassword, updateProfile, updateProfilePicture, updateUserType, uploadAadharcard, uploadPanCard } from "../controllers/userController.js";
+import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
 import singleUpload from "../middlewares/multer.js";
 const router = express.Router();
 
@@ -15,6 +15,10 @@ router.route("/logout").get(logout);
 
 // Get my profile
 router.route("/me").get(isAuthenticated ,getMyProfile);
+
+// Delete my profile
+router.route("/me").delete(isAuthenticated ,deleteMyProfile);
+
 
 // ChangePassword
 router.route("/changepassword").put(isAuthenticated, changePassword);
@@ -36,6 +40,16 @@ router.route("/forgetpassword").post(forgetPassword);
 
 // ResetPassword
 router.route("/resetpassword/:token").put(resetPassword);
+
+
+// Admin Routes
+
+// GetAllusers
+router.route("/admin/getallusers").get(isAuthenticated, authorizeAdmin, getAllUsers);
+
+// UpdateUserType
+router.route("/admin/user/:id").put(isAuthenticated, authorizeAdmin, updateUserType).delete(isAuthenticated, authorizeAdmin, deleteUser);
+
 
 
 export default router;

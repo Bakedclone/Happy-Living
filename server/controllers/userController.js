@@ -10,17 +10,17 @@ import getDataUri from "../utils/dataUri.js";
 export const register = catchAsyncError(async(req, res, next)=> {
 
     const { _id, email, password } = req.body;
+    
+    if(!_id || !email || !password) 
+    return next(new ErrorHandler("Enter all fields", 400));
+
+let user = await Users.findOne({ email });
+// user = await Users.findOne({ _id });
+
+if (user) return next(new ErrorHandler("User already exist", 409));
+
+// Upload file on cloud
     const file = req.file;
-
-    if(!_id || !email || !password || !file) 
-        return next(new ErrorHandler("Enter all fields", 400));
-
-    let user = await Users.findOne({ email });
-    // user = await Users.findOne({ _id });
-
-    if (user) return next(new ErrorHandler("User already exist", 409));
-
-    // Upload file on cloud
     const fileUri = getDataUri(file);
     const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
@@ -75,6 +75,27 @@ export const getMyProfile = catchAsyncError(async (req, res, next)=> {
         user,
     });
 })
+
+export const deleteMyProfile = catchAsyncError(async (req, res, next)=> {
+    
+    const user = await Users.findById(req.user._id);
+    
+    if(user.photo.public_id)
+        await cloudinary.v2.uploader.destroy(user.photo.public_id);
+    if(user.pancard.public_id)
+        await cloudinary.v2.uploader.destroy(user.pancard.public_id);
+    if(user.aadharcard.public_id)
+        await cloudinary.v2.uploader.destroy(user.aadharcard.public_id);
+
+    await user.deleteOne();
+
+    res.status(200).cookie("token", null, {
+        expires: new Date(Date.now()),
+    }).json({
+        success: true,
+        message: "User Deleted Successfully.",
+    });
+});
 
 export const changePassword = catchAsyncError(async (req, res, next)=> {
     
@@ -228,3 +249,51 @@ export const resetPassword = catchAsyncError(async (req, res, next)=> {
         message: `Password changed Successfully.`,
     });
 })
+
+// Admin Controllers
+
+export const getAllUsers = catchAsyncError(async (req, res, next)=> {
+    
+    const user = await Users.find({});
+
+    res.status(200).json({
+        success: true,
+        user,
+    });
+})
+
+export const updateUserType = catchAsyncError(async (req, res, next)=> {
+    
+    const user = await Users.findById(req.params.id);
+
+    if(user.type === "user") user.type = "admin";
+    else user.type = "user";
+
+    await user.save();
+
+    res.status(200).json({
+        success: true,
+        message: "User type updated Successfully.",
+    });
+});
+
+export const deleteUser = catchAsyncError(async (req, res, next)=> {
+    
+    const user = await Users.findById(req.params.id);
+
+    if(!user) return next(new ErrorHandler("User not found.", 404));
+    
+    if(user.photo.public_id)
+        await cloudinary.v2.uploader.destroy(user.photo.public_id);
+    if(user.pancard.public_id)
+        await cloudinary.v2.uploader.destroy(user.pancard.public_id);
+    if(user.aadharcard.public_id)
+        await cloudinary.v2.uploader.destroy(user.aadharcard.public_id);
+
+    await user.deleteOne();
+
+    res.status(200).json({
+        success: true,
+        message: "User Deleted Successfully.",
+    });
+});

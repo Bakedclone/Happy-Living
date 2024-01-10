@@ -12,4 +12,11 @@ export const isAuthenticated = catchAsyncError(async (req, res, next)=> {
     req.user = await Users.findById(decoded._id);
 
     next();
-})
+});
+
+export const authorizeAdmin = (req, res, next) => {
+    if(req.user.type !== "admin")
+        return next(new ErrorHandler(`${req.user.type} is not allowed to access this resource.`,403));
+
+    next();
+}
