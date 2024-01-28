@@ -14,13 +14,14 @@ export const register = catchAsyncError(async(req, res, next)=> {
     if(!_id || !email || !password) 
     return next(new ErrorHandler("Enter all fields", 400));
 
-let user = await Users.findOne({ email });
-// user = await Users.findOne({ _id });
+    let user = await Users.findOne({ email });
+    // user = await Users.findOne({ _id });
 
-if (user) return next(new ErrorHandler("User already exist", 409));
+    if (user) return next(new ErrorHandler("User already exist", 409));
 
-// Upload file on cloud
+    // Upload file on cloud
     const file = req.file;
+    console.log(file);
     const fileUri = getDataUri(file);
     const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 

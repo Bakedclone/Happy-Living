@@ -29,7 +29,6 @@ const schema = new mongoose.Schema({
     },
     images: [
         {
-            image: {
                 public_id : {
                     type: String,
                     // required: true,
@@ -38,7 +37,6 @@ const schema = new mongoose.Schema({
                     type: String,
                     // required: true,
                 }
-            }
         }
     ]
 

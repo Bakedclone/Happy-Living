@@ -1,29 +1,32 @@
 import mongoose from "mongoose";
+import { Property } from "../models/Property.js";
 
 const schema = new mongoose.Schema({
 
-    // Propertyid: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "PG",
-    // },
-    RoomID:{
+    
+    _id:{
         type:String,
         required:[true, "Please enter your Room No."],
-        maxLength:[6, "Room No. must be atmost 6 character"]
+        // maxLength:[6, "Room No. must be atmost 6 character"]
     },
-    Propertyid:{
-        type:String,
-        required:[true, "Please enter your Room-ID"]
+    Propertyid: {
+        type: mongoose.Schema.Types.String,
+        ref: Property,
+    },
+    MonthlyRent: {
+        type: Number,
+        required: true,
     },
     SharingCapacity:{
         type:Number,
         required:[true, "Please enter your Room No."],
         maxLength:[2, "Capacity must be atmost 2 character"]
     },
-    occupied:{
+    Occupied:{
         type:Number,
         required:[true, "Please enter your Room No."],
-        maxLength:[2, "Occupied length must be atmost 2 character"]
+        maxLength:[2, "Occupied length must be atmost 2 character"],
+        default: 0
     },
     facilities: [
         {
@@ -39,3 +42,5 @@ const schema = new mongoose.Schema({
     },
 
 })
+
+export const Rooms = mongoose.model("Rooms", schema, "Rooms");

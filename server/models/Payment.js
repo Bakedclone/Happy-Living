@@ -1,17 +1,26 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-
-    Paymentid:{
-        type:String,
-        required:[true, "Please enter Payment ID"]
+    // razorpay_signature: {
+    //     type: String,
+    //     required: true,
+    // }, razorpay_payment_id: {
+    //     type: String,
+    //     required: true,
+    // }, razorpay_subscription_id: {
+    //     type: String,
+    //     required: true,
+    // },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     },
-    Tenantid:{
+    TenantID:{
         type:String,
         required:[true, "Please enter Tenant ID"]
     },
-    amount:{
-        type:INT,
+    Amount:{
+        type:Number,
         required:[true, "Please enter Amount"]
     },
     PaymentDate: {
@@ -21,9 +30,15 @@ const schema = new mongoose.Schema({
     PaymentMethod: {
         type: String,
     },
-    transcationId:{
+    RazorPayPaymentID:{
         type:String,
-        required:[true, "Please enter Transcation-ID"]
+        required:[true, "Please enter Payment ID"]
     },
-    
-})
+    RazorPaySignatureID:{
+        type:String,
+        required:[true, "Please enter Payment ID"]
+    },
+
+});
+
+export const Payment = mongoose.model("Payment", schema, "Payment");

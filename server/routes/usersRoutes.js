@@ -16,6 +16,7 @@ router.route("/logout").get(logout);
 // Get my profile
 router.route("/me").get(isAuthenticated ,getMyProfile);
 
+
 // Delete my profile
 router.route("/me").delete(isAuthenticated ,deleteMyProfile);
 

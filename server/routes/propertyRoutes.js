@@ -1,8 +1,11 @@
 import express from "express";
-import { addproperty } from "../controllers/propertyController.js";
+import { addProperty } from "../controllers/propertyController.js";
+import { multipleUpload } from "../middlewares/multer.js";
+import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.route("/addproperty").post(addproperty)
+// Add New Property
+router.route("/addproperty").post(isAuthenticated, authorizeAdmin, multipleUpload, addProperty);
 
 export default router;
