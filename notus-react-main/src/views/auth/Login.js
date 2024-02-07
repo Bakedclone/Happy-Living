@@ -1,17 +1,23 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import  { login } from "./../../redux/actions/user.js";
 import { useDispatch } from 'react-redux';
 
+// import { useHistory } from 'react-router-dom';
+
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('faizal@gmail.com');
+  const [password, setPassword] = useState('123456');
+  // const history = useHistory();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(email);
     dispatch(login(email, password));
+    // history.push('/');
+    navigate('/');
   }
   return (
     <>

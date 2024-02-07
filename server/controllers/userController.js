@@ -20,19 +20,19 @@ export const register = catchAsyncError(async(req, res, next)=> {
     if (user) return next(new ErrorHandler("User already exist", 409));
 
     // Upload file on cloud
-    const file = req.file;
-    console.log(file);
-    const fileUri = getDataUri(file);
-    const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
+    // const file = req.file;
+    // console.log(file);
+    // const fileUri = getDataUri(file);
+    // const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
     user = await Users.create({
         _id,
         email,
         password,
-        photo: {
-            public_id: mycloud.public_id,
-            url: mycloud.secure_url,
-        }
+        // photo: {
+        //     public_id: mycloud.public_id,
+        //     url: mycloud.secure_url,
+        // }
     })
 
     sendToken(res, user, "Registered Successfully.", 201);
@@ -61,6 +61,9 @@ export const login = catchAsyncError(async(req, res, next)=> {
 export const logout = catchAsyncError(async (req, res, next)=> {
     res.status(200).cookie("token", null, {
         expires: new Date(Date.now()),
+        httpOnly: true,
+        secure: true, 
+        sameSite: "none",
     }).json({
         success: true,
         message: "Logout Successfully."
@@ -123,13 +126,14 @@ export const changePassword = catchAsyncError(async (req, res, next)=> {
 
 export const updateProfile = catchAsyncError(async (req, res, next)=> {
     
-    const { name, email, phoneNumber } = req.body;
+    const { name, email, phoneNumber, address } = req.body;
 
     const user = await Users.findById(req.user._id);
     
     if(name) user.name = name;
     if(email) user.email = email;
     if(phoneNumber) user.phoneNumber = phoneNumber;
+    if(address) user.address = address;
 
     await user.save();
 

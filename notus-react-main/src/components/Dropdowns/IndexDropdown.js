@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
+import Avatar from "./../../assets/img/avatar.png"
+import { motion } from "framer-motion";
+import { useDispatch } from 'react-redux';
+import  { logout } from "./../../redux/actions/user.js";
 
-const IndexDropdown = () => {
+
+const IndexDropdown = ({isAuthenticated, user}) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -16,19 +21,38 @@ const IndexDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+  // const history = useHistory();
+  const dispatch = useDispatch();
+  const logoutHandler = (e)=>{
+    e.preventDefault();
+    dispatch(logout());
+    closeDropdownPopover();
+    // history.push('/');
+  }
   return (
     <>
-      <a
-        className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-        href="#pablo"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        Demo Pages
-      </a>
+      {isAuthenticated ?
+        <span
+          type="button"
+          href="#pablo"
+          ref={btnDropdownRef}
+          alt="userprofile"
+          onClick={(e) => {
+            e.preventDefault();
+            dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
+          }}>
+          <motion.img
+            whileTap={{ scale: 0.6 }}
+            src={user.photo ? user.photo.url : Avatar}
+            className=" w-8 min-w-[40px] h-8 min-h-[30px] drop-shadow-xl cursor-pointer rounded-full inline-block"
+          /> <i className="fas fa-solid fa-caret-down"></i></span> :
+        <Link
+          to="/auth/login">
+          <button
+            className="bg-lightBlue-500 text-white active:bg-lightBlue-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+          >
+            <i class="fa-solid fa-right-to-bracket"></i> Login
+          </button></Link>}
       <div
         ref={popoverDropdownRef}
         className={
@@ -36,77 +60,72 @@ const IndexDropdown = () => {
           "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
         }
       >
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          Admin Layout
-        </span>
-        <Link
-          to="/admin/dashboard"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/admin/settings"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Settings
-        </Link>
-        <Link
-          to="/admin/tables"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Tables
-        </Link>
-        <Link
-          to="/admin/maps"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Maps
-        </Link>
+        {user && user.type === "admin" ? (
+          <span>
+            <span
+              className={
+                "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+              }
+            >
+              Admin Layout
+            </span>
+            <Link
+              to="/admin/dashboard"
+              className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            >
+              Dashboard
+            </Link>
+            <Link
+              to="/admin/settings"
+              className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            >
+              Settings
+            </Link>
+            <Link
+              to="/admin/tables"
+              className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            >
+              Tables
+            </Link>
+            <Link
+              to="/admin/maps"
+              className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            >
+              Maps
+            </Link>
+          </span>) : (<></>)}
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Auth Layout
+          Account
         </span>
-        <Link
-          to="/auth/login"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Login
-        </Link>
-        <Link
-          to="/auth/register"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Register
-        </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          No Layout
-        </span>
-        <Link
-          to="/landing"
-          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        >
-          Landing
-        </Link>
         <Link
           to="/profile"
           className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
         >
           Profile
         </Link>
+        <Link
+          to="/editprofile"
+          className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+        >
+          Edit Profile
+        </Link>
+        <div
+          className={
+            "flex justify-center mt-5 items-center h-full"
+          }
+        >
+          <button
+            className="bg-lightBlue-500 text-white self-center active:bg-lightBlue-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+            onClick={logoutHandler}
+          >
+            <i class="fa-solid fa-right-to-bracket"></i> logout
+          </button>
+        </div>
       </div>
     </>
   );

@@ -20,6 +20,9 @@ const schema = new mongoose.Schema({
         unique: true,
         validate: validator.isEmail,
     },
+    address:{
+        type:String
+    },
     phoneNumber: {
         type: Number,
       },

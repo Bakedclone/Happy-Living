@@ -15,7 +15,6 @@ export const addProperty = async(req, res, next) => {
     const files = req.files;
 
     const images = [];
-
     // Traverse through each file and upload to Cloudinary
     for (let index = 0; index < files.length; index++) {
         const file = files[index];
@@ -35,7 +34,6 @@ export const addProperty = async(req, res, next) => {
         // Push img into images array
         images.push(img);
     }
-
     try {
         await Property.create({
             _id,
@@ -55,5 +53,14 @@ export const addProperty = async(req, res, next) => {
         if(error.code == 11000)
             next(new ErrorHandler("Enter Unique ID", 400));
     }
-
 };
+
+export const getAllProperty = catchAsyncError(async (req, res, next)=> {
+    
+    const property = await Property.find({});
+
+    res.status(200).json({
+        success: true,
+        property,
+    });
+})
