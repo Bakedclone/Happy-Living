@@ -105,15 +105,41 @@ const IndexDropdown = ({isAuthenticated, user}) => {
       <Link
         to="/profile"
         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+        onClick={closeDropdownPopover}
       >
         Profile
       </Link>
       <Link
         to="/updateprofile"
         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+        onClick={closeDropdownPopover}
       >
         Update Profile
       </Link>
+      {user && user.type === "tenant" ? (
+        <span>
+          <span
+            className={
+              "text-sm pt-6 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+            }
+          >
+            My Stay
+          </span>
+          <Link
+            to="/payrent"
+            className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            onClick={closeDropdownPopover}
+          >
+            Pay Rent
+          </Link>
+          <Link
+            to="/admin/settings"
+            className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            onClick={closeDropdownPopover}
+          >
+            Count Deposite
+          </Link>
+        </span>) : (<></>)}
       <div
         className={
           "flex justify-center mt-5 items-center h-full"

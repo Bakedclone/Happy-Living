@@ -150,7 +150,9 @@ export const updateProfilePicture = catchAsyncError(async (req, res, next)=> {
     const fileUri = getDataUri(file);
     const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
     
-    await cloudinary.v2.uploader.destroy(user.photo.public_id);
+    if(user.photo.public_id)
+        await cloudinary.v2.uploader.destroy(user.photo.public_id);
+
     user.photo = {
         public_id: mycloud.public_id,
         url: mycloud.secure_url,
@@ -300,5 +302,24 @@ export const deleteUser = catchAsyncError(async (req, res, next)=> {
     res.status(200).json({
         success: true,
         message: "User Deleted Successfully.",
+    });
+});
+
+export const RequestStay = catchAsyncError(async (req, res, next)=> {
+    
+    const user = await Users.findById(req.user._id);
+    const { SharingCapacity, PropertyID, Description, CheckINDate } = req.body;
+
+    const to = process.env.MY_MAIL;
+    const subject = `HappyLiving. Request for Stay by ${user._id}`;
+    const message = `User : ${user._id} has requested a stay at \nProperty : ${PropertyID} \nhaving Sharing Capacity : ${SharingCapacity}` + (Description ? `\nDescription : ${Description}` : ('.'));
+
+    await sendEmail(to, subject, message);
+
+
+
+    res.status(200).json({
+        success: true,
+        message: "Your Request is send Successfully. Landlord will contact you with in 24hrs.",
     });
 });

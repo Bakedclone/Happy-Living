@@ -10,10 +10,10 @@ import { clearError, clearMessage } from "./../../redux/reducer/userSlicer.js";
 
 export default function CardUpdateProfile() {
   const { isAuthenticated, user, error, message } = useSelector(state => state.user);
-  const [email, setEmail] = useState(user.email);
-  const [name, setName] = useState(user.name);
-  const [address, setAddress] = useState(user.address);
-  const [phoneNumber, setPhoneNumber] = useState(user.address);
+  const [email, setEmail] = useState(user?user.email:"");
+  const [name, setName] = useState(user?user.name:"");
+  const [address, setAddress] = useState(user?user.address:"");
+  const [phoneNumber, setPhoneNumber] = useState(user?user.phoneNumber:"");
   const dispatch = useDispatch();
   const history = useHistory();
   const submitHandler = (e) => {
@@ -150,7 +150,7 @@ export default function CardUpdateProfile() {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={user.name}
+                    defaultValue={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -166,7 +166,7 @@ export default function CardUpdateProfile() {
                   <input
                     type="email"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={user.email}
+                    defaultValue={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -220,7 +220,7 @@ export default function CardUpdateProfile() {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={user.address}
+                    defaultValue={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
@@ -236,7 +236,7 @@ export default function CardUpdateProfile() {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={user.phoneNumber}
+                    defaultValue={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
                 </div>
@@ -358,47 +358,6 @@ export default function CardUpdateProfile() {
                   Update Photo
                 </button>
               </div>
-            </div>
-
-            <hr className="mt-6 border-b-1 border-blueGray-300" />
-
-            <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-              Contact Information
-            </h6>
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={user.address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="w-full lg:w-4/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Phone Number
-                  </label>
-                  <input
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={user.phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                </div>
-              </div>
-
             </div>
           </form>
         </div>

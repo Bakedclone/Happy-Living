@@ -11,6 +11,8 @@ import { getAllProperty } from "./../redux/actions/property.js";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import CardAppleWatch from "components/Cards/CardAppleWatch";
+import { Route, Switch } from "react-router-dom";
+import BookNow from "./BookNow";
 
 function Selectproerty() {
   const { isAuthenticated, user, error, message } = useSelector(state => state.user);
@@ -36,7 +38,7 @@ function Selectproerty() {
   console.log(selectedArea);
 
   return (<>
-    <IndexNavbar fixed isAuthenticated={isAuthenticated} user={user} />
+    {/* <IndexNavbar fixed isAuthenticated={isAuthenticated} user={user} /> */}
     <div className="container mt-20 mx-auto items-center flex flex-wrap">
       <div className="flex flex-wrap justify-center bg-white shadow-xl rounded-lg mt-15 py-16 px-12 relative z-10 ">
         <div className="w-full text-center lg:w-8/12">
@@ -88,8 +90,7 @@ function Selectproerty() {
         </Grid>
       </div>
     </div>
-
-    <Footer />
+    {/* <Footer /> */}
   </>
   )
 }

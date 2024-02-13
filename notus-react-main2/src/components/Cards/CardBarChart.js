@@ -1,26 +1,31 @@
 import React from "react";
 import Chart from "chart.js";
 
-export default function CardBarChart() {
+export default function CardBarChart(props) {
   React.useEffect(() => {
     let config = {
       type: "bar",
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
+          "Jan",
+          "Feb",
+          "Mar",
           "April",
           "May",
-          "June",
+          "June", 
           "July",
+          "Aug",
+          "Sept",
+          "Oct",
+          "Nov",
+          "Dec"
         ],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#ed64a6",
             borderColor: "#ed64a6",
-            data: [30, 78, 56, 34, 100, 45, 13],
+            data: props.values[0],
             fill: false,
             barThickness: 8,
           },
@@ -29,7 +34,7 @@ export default function CardBarChart() {
             fill: false,
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [27, 68, 86, 74, 10, 4, 87],
+            data: props.values[1],
             barThickness: 8,
           },
         ],
@@ -97,7 +102,7 @@ export default function CardBarChart() {
     };
     let ctx = document.getElementById("bar-chart").getContext("2d");
     window.myBar = new Chart(ctx, config);
-  }, []);
+  }, [props.reload]);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">

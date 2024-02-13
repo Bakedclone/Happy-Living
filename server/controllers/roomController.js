@@ -88,7 +88,11 @@ export const updateRoom = catchAsyncError(async (req, res, next)=> {
 export const getAvaiableRooms = catchAsyncError(async (req, res, next)=> {
 
     const propertyid = req.body.Propertyid;
-    const rooms = await Rooms.find({$and: [{Propertyid: propertyid}, { $where : "this.Occupied < this.SharingCapacity" }]});
+
+    const rooms = await Rooms.find({
+        Propertyid: propertyid,
+        $expr: { $lt: ["$Occupied", "$SharingCapacity"] }
+    });
 
     res.status(200).json({
         success: true,

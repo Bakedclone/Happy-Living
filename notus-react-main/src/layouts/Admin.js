@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Outlet } from "react-router-dom"
+
 
 // components
 
@@ -19,15 +19,13 @@ import Tables from "views/admin/Tables.js";
 export default function Admin() {
   return (
     <>
-        <Outlet />
-
-      <Sidebar />
+      {/* <Sidebar /> */}
       <div className="relative md:ml-64 bg-blueGray-100">
         <AdminNavbar />
         {/* Header */}
-        <HeaderStats />
+        {/* <HeaderStats /> */}
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
-          <FooterAdmin />
+          {/* <FooterAdmin /> */}
         </div>
       </div>
     </>

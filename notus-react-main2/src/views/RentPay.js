@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Navbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import { useDispatch, useSelector } from "react-redux";
+import { loadTenant } from "./../redux/actions/tenant.js";
+import Paynow from "components/Payment/paynow.js";
 
-export default function Profile() {
+export default function RentPay() {
+
+  const {isAuthenticated, user, error, message} = useSelector(state=>state.user);
+  const {tenant} = useSelector(state=>state.tenant);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(loadTenant());
+  }, [dispatch]);
+
+  console.log(tenant);
+
   return (
     <>
-      {/* <Navbar transparent /> */}
+      <Navbar transparent />
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
@@ -96,12 +110,15 @@ export default function Profile() {
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                    Jenna Stones
+                    {user._id}
                   </h3>
-                  <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                    <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
-                    Los Angeles, California
+                  <div className="leading-normal mt-0 mb-2">
+                    <h6 className="text-xl mb-1 font-semibold">
+                    <i className="fas fa-solid fa-indian-rupee-sign"></i>{" "}
+                      Pending Rent : {(tenant ? tenant.PendingRent : 0)}
+                      </h6>
                   </div>
+                  <Paynow Rent={(tenant ? tenant.PendingRent : 0)}/>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
                     Solution Manager - Creative Tim Officer

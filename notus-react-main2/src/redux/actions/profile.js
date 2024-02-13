@@ -63,7 +63,7 @@ export const updateProfilePicture = (formdata) => async (dispatch) => {
 export const updateAadhar = (formdata) => async (dispatch) => {
     try {
         dispatch(updateaadharRequest());
-        const { data } = await axios.put(`${server}/updateprofilepicture`, formdata, {
+        const { data } = await axios.put(`${server}/uploadaadharcard`, formdata, {
             headers: {
                 "Content-type": "multipart/form-data",
             },
@@ -79,7 +79,7 @@ export const updateAadhar = (formdata) => async (dispatch) => {
 export const updatePan = (formdata) => async (dispatch) => {
     try {
         dispatch(updatePanRequest());
-        const { data } = await axios.put(`${server}/updateprofilepicture`, formdata, {
+        const { data } = await axios.put(`${server}/uploadpancard`, formdata, {
             headers: {
                 "Content-type": "multipart/form-data",
             },

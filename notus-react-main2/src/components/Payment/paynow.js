@@ -3,11 +3,10 @@ import axios from 'axios';
 // import Razorpay from 'razorpay';
 
 
-function Paynow() {
+function Paynow(props) {
   const paymenthandler = async (amount) => {
     const { data: { key } } = await axios.get("http://localhost:4000/api/v1/razorpaykey");
     const { data: { order } } = await axios.post("http://localhost:4000/api/v1/paynow", { amount });
-    const userId = 'dhruv';
     // console.log(data); 
     var options = {
       key, // Enter the Key ID generated from the Dashboard
@@ -17,7 +16,7 @@ function Paynow() {
       description: "Paying Guest website",
       image: "https://example.com/your_logo",
       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: `http://localhost:4000/api/v1/paymentverifiaction`,
+      callback_url: "http://localhost:4000/api/v1/paymentverifiaction",
       prefill: { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
         name: "Sufiyan Shaikh", //your customer's name
         "email": "gaurav.kumar@example.com",
@@ -30,14 +29,13 @@ function Paynow() {
         "color": "#3399cc"
       }
     };
-    console.log(`Callback URL: ${callback_url}`);
     var razor = new window.Razorpay(options);
     razor.open();
   }
 
   return (
     <div>Paynow
-      <button onClick={()=>paymenthandler(700)}>Pay</button>
+      <button onClick={()=>paymenthandler(props.Rent)}>Pay</button>
     </div>
   )
 }

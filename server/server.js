@@ -4,6 +4,9 @@ import cloudinary from "cloudinary";
 import Razorpay from "razorpay";
 import nodeCron from "node-cron"    // Task schedular
 import { AutoUpdateRent, CheckInActiveTenant, RemoveInActiveTenant } from "./controllers/tenantController.js";
+// Model Import
+import { Stats } from "./models/Stats.js";
+
 connectDB();
 
 cloudinary.v2.config({
@@ -18,7 +21,7 @@ export const instance = new Razorpay({
 });
 
 nodeCron.schedule("0 0 0 1 * *", async () => {
-// nodeCron.schedule("* * * * * *", async () => {
+  // nodeCron.schedule("* * * * * *", async () => {
   try {
     AutoUpdateRent();
     CheckInActiveTenant();
@@ -26,7 +29,19 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
   } catch (error) {
     console.log(error);
   }
-})
+});
+nodeCron.schedule("0 0 1 1 *", async () => {
+  // nodeCron.schedule("* * * * * *", async () => {
+  try {
+    const Revenue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const Tenant = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    await Stats.create({Revenue, Tenant});
+  } catch (error) {
+      console.log(error);
+  }
+});
+
+
 
 app.listen(process.env.PORT, () =>
   console.log(`Server is running on ${process.env.PORT}`));

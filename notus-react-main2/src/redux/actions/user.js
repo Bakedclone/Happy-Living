@@ -1,6 +1,6 @@
 import { server } from "./../store.js";
 import axios from 'axios';
-import { loginRequest, loginFail, loginSuccess, loadUserRequest, loadUserSuccess, loadUserFail, logoutRequest, logoutSuccess, logoutFail, registerRequest, registerSuccess, registerFail } from "./../reducer/userSlicer.js";
+import { loginRequest, loginFail, loginSuccess, loadUserRequest, loadUserSuccess, loadUserFail, logoutRequest, logoutSuccess, logoutFail, registerRequest, registerSuccess, registerFail, bookNowRequest, bookNowSuccess, bookNowFail } from "./../reducer/userSlicer.js";
 // import { useSelector, useDispatch } from 'react-redux'
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -62,5 +62,21 @@ export const logout = () => async (dispatch) => {
     } catch (error) { 
         dispatch(logoutFail(error.response.data.message));
 
+    }
+}
+
+export const bookNow = (SharingCapacity, PropertyID, Description, CheckINDate) => async (dispatch) => {
+    try {
+        dispatch(bookNowRequest());
+        const  {data}  = await axios.post(`${server}/booknow`,{SharingCapacity, PropertyID, Description, CheckINDate}, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(bookNowSuccess(data));
+    } catch (error) { 
+        dispatch(bookNowFail(error.response.data));
     }
 }

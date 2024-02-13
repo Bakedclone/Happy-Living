@@ -14,6 +14,9 @@ import Dashboard from "views/admin/Dashboard.js";
 import Maps from "views/admin/Maps.js";
 import Settings from "views/admin/Settings.js";
 import Tables from "views/admin/Tables.js";
+import AddTenants from "views/admin/AddTenants";
+import AvailableRooms from "views/admin/AvailableRooms";
+import ViewUser from "views/admin/ViewUser";
 
 export default function Admin() {
   return (
@@ -29,6 +32,9 @@ export default function Admin() {
             <Route path="/admin/maps" exact component={Maps} />
             <Route path="/admin/settings" exact component={Settings} />
             <Route path="/admin/tables" exact component={Tables} />
+            <Route path="/admin/addtenants" exact component={AddTenants} />
+            <Route path="/admin/getavailablerooms" exact component={AvailableRooms} />
+            <Route path="/admin/viewuser" exact component={ViewUser} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />

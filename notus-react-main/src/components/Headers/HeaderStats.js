@@ -14,16 +14,16 @@ export default function HeaderStats() {
             {/* Card stats */}
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-                <CardStats
-                  statSubtitle="TRAFFIC"
-                  statTitle="350,897"
-                  statArrow="up"
-                  statPercent="3.48"
-                  statPercentColor="text-emerald-500"
-                  statDescripiron="Since last month"
-                  statIconName="far fa-chart-bar"
-                  statIconColor="bg-red-500"
-                />
+                  {/* <CardStats
+                    statSubtitle="Total Pending Rent"
+                    statTitle="350,897"
+                    statArrow="up"
+                    statPercent="3.48"
+                    statPercentColor="text-emerald-500"
+                    statDescripiron="Since last sdfkjhs"
+                    statIconName="far fa-chart-bar"
+                    statIconColor="bg-red-500"
+                  /> */}
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
@@ -51,7 +51,7 @@ export default function HeaderStats() {
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="PERFORMANCE"
+                  statSubtitle="Rev"
                   statTitle="49,65%"
                   statArrow="up"
                   statPercent="12"

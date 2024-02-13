@@ -22,7 +22,7 @@ export const userSlice = createSlice({
       state.isAuthenticated = false;
       state.error = action.payload;
     },
-    
+
     registerRequest: (state) => {
       state.loading = true;
     },
@@ -68,6 +68,23 @@ export const userSlice = createSlice({
       state.isAuthenticated = false;
       // state.error = action.payload;
     },
+
+    // Book Now
+    bookNowRequest: (state) => {
+      state.loading = true;
+      state.message = "Sending your Booking Request....."
+    },
+    bookNowSuccess: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.message = action.payload.message;
+    },
+    bookNowFail: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.error = action.payload;
+    },
+
     clearError: (state) => {
       state.error = null;
     },
@@ -80,8 +97,10 @@ export const userSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { loginRequest, loginSuccess, loginFail,loadUserRequest, loadUserSuccess, loadUserFail, clearError, clearMessage,
-  logoutRequest, logoutSuccess, logoutFail, registerRequest, registerSuccess, registerFail, } = userSlice.actions
+export const { loginRequest, loginSuccess, loginFail, loadUserRequest, loadUserSuccess, loadUserFail, clearError, clearMessage,
+  logoutRequest, logoutSuccess, logoutFail, registerRequest, registerSuccess, registerFail, bookNowRequest,
+  bookNowSuccess,
+  bookNowFail, } = userSlice.actions
 
 
 

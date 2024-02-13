@@ -11,7 +11,7 @@ export default function Updateprofile() {
 
   return (
     <>
-      <Navbar transparent />
+      {/* <Navbar transparent /> */}
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div

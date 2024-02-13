@@ -11,6 +11,7 @@ import crypto from "crypto";
 import cloudinary from "cloudinary";
 import getDataUri from "../utils/dataUri.js";
 import { PastTenants } from "../models/PastTenants.js";
+import { Stats } from "./../models/Stats.js";
 
 
 export const addTenant = catchAsyncError(async(req, res, next)=> {
@@ -32,6 +33,9 @@ export const addTenant = catchAsyncError(async(req, res, next)=> {
 
     if(room.SharingCapacity === room.Occupied)
         return next(new ErrorHandler("Selected Room is Already full", 400));
+
+    user.type = "tenant";
+    user.save();
 
     room.Occupied += 1;
     room.save();
@@ -87,6 +91,23 @@ export const addTenant = catchAsyncError(async(req, res, next)=> {
     });
 });
 
+export const getMyInfo = catchAsyncError(async (req, res, next)=> {
+    
+    const tenant = await Tenants.find({UserID: req.user._id});
+
+    if(!tenant) {
+        res.status(200).json({
+            success: true,
+            message: "Tenant Not found.",
+        });
+    }
+    
+    res.status(200).json({
+        success: true,
+        tenant: tenant[0]
+    });
+})
+
 export const updateTenant = catchAsyncError(async(req, res, next)=> {
 
     var { UserID, RoomID, MonthlyRent, PendingRent, DepositCount, Status, CheckINDate, CheckOUTDate } = req.body;
@@ -140,6 +161,13 @@ export const updateTenant = catchAsyncError(async(req, res, next)=> {
 export const countDeposite = catchAsyncError(async(req, res, next)=> {
     
     const tenant = await Tenants.findOne({UserID: req.user._id});
+
+    if(tenant.PendingRent > 0) {
+        res.status(200).json({
+        success: true,
+        message: `Your Rent is pending. Please Pay your pending rent then you can apply.`,
+        });
+    }
 
     tenant.DepositCount = true;
 
@@ -231,4 +259,17 @@ export const RemoveInActiveTenant = catchAsyncError(async(req, res, next)=> {
         await tenants[i].deleteOne();
         }
     }
+});
+
+Tenants.watch().on("change", async()=>{
+    
+    const tenants = await Tenants.find({ Status: "Active" });
+    const stats = await Stats.findOne({}).sort({ createdAt: "desc"}).limit(1);
+    // console.log(tenants.length);
+
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+
+    stats.Tenant[currentMonth] = tenants.length;
+    await stats.save();
 });

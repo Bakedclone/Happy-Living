@@ -34,7 +34,7 @@ const schema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["admin", "user"],
+        enum: ["admin", "user", "tenant"],
         default: "user",
     },
     photo: {
