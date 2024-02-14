@@ -269,6 +269,23 @@ export const getAllUsers = catchAsyncError(async (req, res, next)=> {
     });
 })
 
+export const getUser = catchAsyncError(async (req, res, next)=> {
+    
+    const user = await Users.find({_id: req.body._id});
+
+    if(!user) {
+        res.status(404).json({
+            success: false,
+            message: "User Not Found.",
+        });
+    }
+
+    res.status(200).json({
+        success: true,
+        user,
+    });
+})
+
 export const updateUserType = catchAsyncError(async (req, res, next)=> {
     
     const user = await Users.findById(req.params.id);

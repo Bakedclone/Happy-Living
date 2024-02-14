@@ -1,4 +1,4 @@
-import { dashboardCardFail, dashboardCardRequest, dashboardCardSuccess, dashboardStatsFail, dashboardStatsRequest, dashboardStatsSuccess } from "./../reducer/dashboardSlicer.js";
+import { dashboardCardFail, dashboardCardRequest, dashboardCardSuccess, dashboardStatsFail, dashboardStatsRequest, dashboardStatsSuccess, getUserFail, getUserRequest, getUserSuccess } from "./../reducer/dashboardSlicer.js";
 import { server } from "./../store.js";
 import axios from 'axios'
 
@@ -25,5 +25,21 @@ export const dashboardStatsLoader = () => async (dispatch) => {
         dispatch(dashboardStatsSuccess(data));
     } catch (error) {
         dispatch(dashboardStatsFail(error.response.data.message));
+    }
+}
+
+export const getUser = (_id) => async (dispatch) => {
+    try {
+        dispatch(getUserRequest());
+        const { data } = await axios.post(`${server}/admin/getuser`, {_id},{
+            headers: {
+                "Content-type": "application/json",
+            },
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(getUserSuccess(data));
+    } catch (error) {
+        dispatch(getUserFail(error.response.data.message));
     }
 }

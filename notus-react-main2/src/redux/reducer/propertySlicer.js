@@ -19,11 +19,33 @@ export const propertySlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        addPropertyRequest: (state) => {
+            state.loading = true;
+        },
+        addPropertySuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message;
+        },
+        addPropertyFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        clearError: (state) => {
+            state.error = null;
+        },
+        clearMessage: (state) => {
+            state.message = null;
+        }
     },
 })
 
 export const { getPropertyRequest,
     getPropertySuccess,
-    getPropertyFail } = propertySlice.actions
+    getPropertyFail,
+    addPropertyRequest,
+    addPropertySuccess,
+    addPropertyFail,
+    clearError,
+    clearMessage } = propertySlice.actions
 
 export default propertySlice.reducer

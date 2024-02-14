@@ -88,6 +88,7 @@ export const addTenant = catchAsyncError(async(req, res, next)=> {
     res.status(200).json({
     success: true,
     tenant,
+    message: "New Tenant added Successfully."
     });
 });
 
@@ -155,6 +156,7 @@ export const updateTenant = catchAsyncError(async(req, res, next)=> {
     res.status(200).json({
     success: true,
     tenant,
+    message: "Tenant Updated Successfully."
     });
 });
 

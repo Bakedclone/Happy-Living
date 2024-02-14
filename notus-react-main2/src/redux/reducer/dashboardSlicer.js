@@ -31,6 +31,19 @@ export const dashboardSlice = createSlice({
             state.error = action.payload;
         },
 
+        // Get User
+        getUserRequest: (state) => {
+            state.loading = true;
+        },
+        getUserSuccess: (state, action) => {
+            state.loading = false;
+            state.user = action.payload.user;
+        },
+        getUserFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
         clearError: (state) => {
             state.error = null;
         },
@@ -47,6 +60,9 @@ export const {
     dashboardStatsRequest,
     dashboardStatsSuccess,
     dashboardStatsFail,
+    getUserRequest,
+    getUserSuccess,
+    getUserFail,
     clearError,
     clearMessage } = dashboardSlice.actions
 

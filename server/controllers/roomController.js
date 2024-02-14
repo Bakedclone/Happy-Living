@@ -41,6 +41,7 @@ export const addRooms = catchAsyncError(async(req, res, next)=> {
     res.status(200).json({
     success: true,
     room,
+    message: "New Room added Successfully."
     });
 });
 

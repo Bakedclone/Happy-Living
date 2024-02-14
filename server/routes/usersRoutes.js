@@ -1,5 +1,5 @@
 import express from "express";
-import { RequestStay, changePassword, deleteMyProfile, deleteUser, forgetPassword, getAllUsers, getMyProfile, login, logout, register, resetPassword, updateProfile, updateProfilePicture, updateUserType, uploadAadharcard, uploadPanCard } from "../controllers/userController.js";
+import { RequestStay, changePassword, deleteMyProfile, deleteUser, forgetPassword, getAllUsers, getMyProfile, getUser, login, logout, register, resetPassword, updateProfile, updateProfilePicture, updateUserType, uploadAadharcard, uploadPanCard } from "../controllers/userController.js";
 import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
 import singleUpload from "../middlewares/multer.js";
 const router = express.Router();
@@ -19,7 +19,6 @@ router.route("/me").get(isAuthenticated ,getMyProfile);
 
 // Delete my profile
 router.route("/me").delete(isAuthenticated ,deleteMyProfile);
-
 
 // ChangePassword
 router.route("/changepassword").put(isAuthenticated, changePassword);
@@ -47,6 +46,9 @@ router.route("/resetpassword/:token").put(resetPassword);
 
 // GetAllusers
 router.route("/admin/getallusers").get(isAuthenticated, authorizeAdmin, getAllUsers);
+
+// Get User
+router.route("/admin/getuser").post(isAuthenticated, authorizeAdmin, getUser);
 
 // UpdateUserType
 router.route("/admin/user/:id").put(isAuthenticated, authorizeAdmin, updateUserType).delete(isAuthenticated, authorizeAdmin, deleteUser);

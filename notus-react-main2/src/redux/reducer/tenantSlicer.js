@@ -19,6 +19,41 @@ export const tenantSlice = createSlice({
       state.error = action.payload;
     },
 
+    addTenantRequest: (state) => {
+      state.loading = true;
+    },
+    addTenantSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    addTenantFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    updateTenantRequest: (state) => {
+      state.loading = true;
+    },
+    updateTenantSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    updateTenantFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    RemoveTenantRequest: (state) => {
+      state.loading = true;
+    },
+    RemoveTenantSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    RemoveTenantFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
 
     clearError: (state) => {
       state.error = null;
@@ -29,11 +64,20 @@ export const tenantSlice = createSlice({
   },
 })
 
-export const { 
-    loadTenantRequest,
-    loadTenantSuccess,
-    loadTenantFail,
-    clearError,
-    clearMessage } = tenantSlice.actions
+export const {
+  loadTenantRequest,
+  loadTenantSuccess,
+  loadTenantFail,
+  addTenantRequest,
+  addTenantSuccess,
+  addTenantFail,
+  updateTenantRequest,
+  updateTenantSuccess,
+  updateTenantFail,
+  RemoveTenantRequest,
+  RemoveTenantSuccess,
+  RemoveTenantFail,
+  clearError,
+  clearMessage } = tenantSlice.actions
 
 export default tenantSlice.reducer

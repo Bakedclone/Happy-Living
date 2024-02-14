@@ -190,31 +190,67 @@ export default function Sidebar() {
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
-                
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/addtenants") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
                   to="/admin/addtenants"
                 >
-                  <i className="fas fa-solid fa-user-plus text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className={"fas fa-solid fa-user-plus mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/addtenants") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
                   Add Tenants
                 </Link>
               </li>
               <li className="items-center">
                 <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/updatetenants") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/updatetenants"
+                >
+                  <i className={"fas fa-solid fa-user-plus mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/updatetenants") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
+                  Update Tenant
+                </Link>
+              </li>
+              
+              <li className="items-center">
+                <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/admin/addtenants"
+                  to="/admin/removetenants"
                 >
                   <i className="fas fa-solid fa-user-plus text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Update Tenants
+                  Remove Tenants
                 </Link>
               </li>
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/admin/addtenants"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/viewtenants") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/viewtenants"
                 >
-                  <i className="fas fa-solid fa-user-plus text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Delete Tenants
+                  <i className={"fas fa-solid fa-user-plus mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/viewtenants") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
+                  View All Tenants
                 </Link>
               </li>
             </ul>
@@ -230,10 +266,19 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/landing"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/addproperty") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/addproperty"
                 >
-                  <i className="fas fa-solid fa-building-circle-check text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className={"fas fa-solid fa-building-circle-check mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/addproperty") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
                   Add Property
                 </Link>
               </li>
@@ -250,10 +295,19 @@ export default function Sidebar() {
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
             <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/landing"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/addrooms") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/addrooms"
                 >
-                  <i className="fas fa-solid fa-house-chimney-medical text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className={"fas fa-solid fa-building-circle-check mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/addrooms") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
                   Add Rooms
                 </Link>
               </li>
@@ -261,7 +315,7 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/landing"
+                  to="/admin/removeroom"
                 >
                   <i className="fas fa-solid fa-house-circle-xmark text-blueGray-400 mr-2 text-sm"></i>{" "}
                   Remove Rooms
@@ -280,11 +334,20 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                  to="/landing"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/updaterooms") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/updaterooms"
                 >
-                  <i className="fas fa-solid fa-house-circle-exclamation text-blueGray-400 mr-2 text-sm"></i>{" "}
-                    Update Rooms
+                  <i className={"fas fa-solid fa-building-circle-check mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/updaterooms") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
+                  Update Rooms
                 </Link>
               </li>
             </ul>

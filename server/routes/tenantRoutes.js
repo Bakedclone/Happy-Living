@@ -11,7 +11,7 @@ router.route("/admin/addtenant").post(isAuthenticated, authorizeAdmin, addTenant
 router.route("/admin/updatetenant").post(isAuthenticated, authorizeAdmin, updateTenant);
 
 // Delete Tenant
-router.route("/admin/deletetenant").delete(isAuthenticated, authorizeAdmin, deleteTenant);
+router.route("/admin/deletetenant").post(isAuthenticated, authorizeAdmin, deleteTenant);
 
 // Count Deposite
 router.route("/countdeposite").put(isAuthenticated, countDeposite);
