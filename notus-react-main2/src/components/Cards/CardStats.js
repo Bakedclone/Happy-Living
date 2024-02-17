@@ -24,7 +24,7 @@ export default function CardStats({
                 {statTitle}
               </span>
             </div>
-            <div className="relative w-auto pl-4 flex-initial">
+            <div className="relative w-auto pl-4 flex-initial mb-5">
               <div
                 className={
                   "text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full " +
@@ -35,7 +35,7 @@ export default function CardStats({
               </div>
             </div>
           </div>
-          <p className="text-sm text-blueGray-400 mt-4">
+          {/* <p className="text-sm text-blueGray-400 mt-4">
             <span className={statPercentColor + " mr-2"}>
               <i
                 className={
@@ -49,7 +49,7 @@ export default function CardStats({
               {statPercent}%
             </span>
             <span className="whitespace-nowrap">{statDescripiron}</span>
-          </p>
+          </p> */}
         </div>
       </div>
     </>

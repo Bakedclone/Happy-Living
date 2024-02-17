@@ -8,16 +8,7 @@ function ViewUser() {
   const { user, error, message } = useSelector(state=>state.dashboard);
   const dispatch = useDispatch();
 
-  console.log(user);
-
-  const [image, setImage] = useState(null);
-  const [imagePrev, setImagePrev] = useState(null);
-
-  const [imageAadhar, setImageAadhar] = useState(null);
-  const [imageAadharPrev, setImageAadharPrev] = useState(null);
-
-  const [imagePan, setImagePan] = useState(null);
-  const [imagePanPrev, setImagePanPrev] = useState(null);
+  // console.log(user);
 
   const [_id, setUserID] = useState();
 
@@ -70,19 +61,19 @@ function ViewUser() {
                 User ID : {user ? user[0]._id : ""}
               </h3>
               <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
+                <i className="fas fa-user mr-2 text-lg text-blueGray-400"></i>{" "}
                 Name : {user ? user[0].name : ""}
               </div>
-              <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
+              <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+                <i className="fas fa-envelope mr-2 text-lg text-blueGray-400"></i>{" "}
                 Email : {user ? user[0].email : ""}
               </div>
-              <div className="mb-2 text-blueGray-600">
+              <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
                 <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
                 Contact : {user ? user[0].phoneNumber : ""}
               </div>
-              <div className="mb-2 text-blueGray-600">
-                <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+              <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+                <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
                 Address : {user ? user[0].address : ""}
               </div>
             </div>
@@ -98,7 +89,7 @@ function ViewUser() {
                   >
                     Aadhar Card
                   </label>
-                  <img src={user ? user[0].aadharcard.url : ""} alt="Uploaded" style={{ maxWidth: '100%' }} />
+                  <img src={user ? user[0].aadharcard.url : ""} alt="image" style={{ maxWidth: '100%' }} />
                 </div>
 
               </div>
@@ -110,7 +101,7 @@ function ViewUser() {
                   >
                     Pan Card
                   </label>
-                  <img src={user ? user[0].pancard.url : ""} alt="Uploaded" style={{ maxWidth: '100%' }} />
+                  <img src={user ? user[0].pancard.url : ""} alt="image" style={{ maxWidth: '100%' }} />
                 </div>
               </div>
             </div>

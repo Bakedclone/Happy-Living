@@ -33,7 +33,7 @@ function Selectproerty() {
     dispatch(getAllProperty())
   }, [dispatch]);
 
-  const [selectedArea, setSelectedArea] = useState('');
+  const [selectedArea, setSelectedArea] = useState('Choose a Area');
   const [selectedCity, setSelectedCity] = useState('');
   console.log(selectedArea);
 
@@ -42,6 +42,10 @@ function Selectproerty() {
     <div className="container mt-20 mx-auto items-center flex flex-wrap">
       <div className="flex flex-wrap justify-center bg-white shadow-xl rounded-lg mt-15 py-16 px-12 relative z-10 ">
         <div className="w-full text-center lg:w-8/12">
+        <p className="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
+            "Ready to experience the warmth and comfort of Our PG? Book now and secure your spot in our vibrant community! Whether you're a student seeking a peaceful study environment or a professional in need of a cozy retreat after a long day's work, Our PG offers the perfect blend of comfort, convenience, and camaraderie."
+
+          </p>
           <label for="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><h6 className="text-xl mb-1 font-semibold">
             Select City :
           </h6></label>
@@ -59,25 +63,13 @@ function Selectproerty() {
           onChange={(event)=>setSelectedArea(event.target.value)}>
             <option selected>Choose a Area</option>
             <option value="S.G Highway">S.G. Highway</option>
+            <option value="Navrangpura">Navrangpura</option>
           </select>
           {/* <h3 className="font-semibold text-3xl">
             Do you love out PG?
           </h3> */}
-          <p className="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
-            "Ready to experience the warmth and comfort of Our PG? Book now and secure your spot in our vibrant community! Whether you're a student seeking a peaceful study environment or a professional in need of a cozy retreat after a long day's work, Our PG offers the perfect blend of comfort, convenience, and camaraderie."
-
-          </p>
-          <div className="sm:block flex flex-col mt-10">
-            <a
-              href="https://github.com/creativetimofficial/notus-react?ref=nr-index"
-              target="_blank"
-              className="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
-            >
-              {/* <i className="fab fa-github text-lg mr-1"></i> */}
-              <span>Book Now</span>
-              <i className="fas fa-solid fa-arrow-right ml-3"></i>
-            </a>
-          </div>
+          
+          
           <div className="text-center mt-16"></div>
         </div>
         <Grid container spacing={6}>

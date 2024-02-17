@@ -13,7 +13,7 @@ export default function Login() {
   const history = useHistory();
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email);
+    // console.log(email);
     dispatch(login(email, password));
     history.push('/');
   }

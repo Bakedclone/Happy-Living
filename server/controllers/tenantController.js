@@ -198,6 +198,15 @@ export const deleteTenant = catchAsyncError(async(req, res, next)=> {
     });
 });
 
+export const getAllTenants = catchAsyncError(async(req, res, next)=> {
+    
+    const tenants = await Tenants.find({}).sort({ CheckINDate: "desc"});
+
+    res.status(200).json({
+        success: true,
+        tenants
+    });
+});
 
 export const AutoUpdateRent = catchAsyncError(async(req, res, next)=> {
     
@@ -208,6 +217,7 @@ export const AutoUpdateRent = catchAsyncError(async(req, res, next)=> {
         tenants[i].save();
     }
 });
+
 
 export const CheckInActiveTenant = catchAsyncError(async(req, res, next)=> {
     

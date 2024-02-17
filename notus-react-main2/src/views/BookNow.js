@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import img from "./../assets/img/commonarea.jpg"
 import { bookNow } from "./../redux/actions/user.js";
+import { getSelectedProperty } from "./../redux/actions/property.js";
 
 function BookNow() {
   const location = useLocation();
   const { data } = location.state;
   console.log(data);
 
-  const [ SharingCapacity, setSharingCapacity ] = useState(0);
-  const [ CheckINDate, setCheckINDate] = useState();
-  const [ Description, setDescription ] = useState(''); 
+  const { SelectedProperty } = useSelector(state => state.property);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSelectedProperty(data))
+  }, [dispatch]);
+
+  console.log(SelectedProperty);
+
+  const [SharingCapacity, setSharingCapacity] = useState(0);
+  const [CheckINDate, setCheckINDate] = useState();
+  const [Description, setDescription] = useState('');
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -127,7 +135,6 @@ function BookNow() {
                 </div>
               </div>
             </div>
-
             <div className="flex flex-wrap items-center mt-32">
               <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
                 <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
@@ -185,7 +192,6 @@ function BookNow() {
             </div>
           </div>
         </section> */}
-
         <section className="relative py-20 ">
           <div
             className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
@@ -216,28 +222,19 @@ function BookNow() {
                   src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
                 /> */}
                 <Carousel>
-                <div>
-                    <img src={img} className="rounded-lg shadow-lg"/>
+                  {SelectedProperty ? SelectedProperty.images.map((image)=> (
+                    <div>
+                    <img src={image.url} className="rounded-lg shadow-lg" />
                     {/* <p className="legend">Legend 1</p> */}
-                </div>
-                <div>
-                    <img src={img} className="rounded-lg shadow-lg"/>
-                    {/* <p className="legend">Legend 2</p> */}
-                </div>
-                <div>
-                    <img src={img} className="rounded-lg shadow-lg"/>
-                    {/* <p className="legend">Legend 3</p> */}
-                </div>
-            </Carousel>
+                  </div>
+                  )): <></>}
+                </Carousel>
               </div>
               <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
                 <div className="md:pr-12">
-                
-                  <h3 className="text-3xl font-semibold">Title</h3>
+                  <h3 className="text-3xl font-semibold">{SelectedProperty ? SelectedProperty.name : ""}</h3>
                   <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                    The extension comes with three pre-built pages to help you
-                    get started faster. You can change the text and images and
-                    you're good to go.
+                    {SelectedProperty ?SelectedProperty.address  : ""}
                   </p>
                   <ul className="list-none mt-6">
                     <li className="py-2">
@@ -537,7 +534,7 @@ function BookNow() {
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="sharing"
                       >
-                        Sharing 
+                        Sharing
                       </label>
                       <input
                         type="number"

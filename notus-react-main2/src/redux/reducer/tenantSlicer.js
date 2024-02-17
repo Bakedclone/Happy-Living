@@ -19,6 +19,18 @@ export const tenantSlice = createSlice({
       state.error = action.payload;
     },
 
+    getAllTenantRequest: (state) => {
+      state.loading = true;
+    },
+    getAllTenantSuccess: (state, action) => {
+      state.loading = false;
+      state.alltenants = action.payload.tenants;
+    },
+    getAllTenantFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     addTenantRequest: (state) => {
       state.loading = true;
     },
@@ -77,6 +89,9 @@ export const {
   RemoveTenantRequest,
   RemoveTenantSuccess,
   RemoveTenantFail,
+  getAllTenantRequest,
+  getAllTenantSuccess,
+  getAllTenantFail,
   clearError,
   clearMessage } = tenantSlice.actions
 

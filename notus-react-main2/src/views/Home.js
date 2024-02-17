@@ -548,39 +548,28 @@ function Home() {
       <div className="flex flex-wrap justify-center">
         <div className="w-full md:w-5/12 px-12 md:px-4 ml-auto mr-auto md:mt-64">
           <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-            <i className="fas fa-code-branch text-xl"></i>
+            <i className="fas fa-home text-xl"></i>
           </div>
           <h3 className="text-3xl mb-2 font-semibold leading-normal text-white">
-            Open Source
+            Home like Comfort
           </h3>
           <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-400">
-            Since{" "}
-            <a
-              href="https://tailwindcss.com/?ref=creativetim"
-              className="text-blueGray-300"
-              target="_blank"
-            >
-              Tailwind CSS
-            </a>{" "}
-            is an open source project we wanted to continue this movement
-            too. You can give this version a try to feel the design and also
-            test the quality of the code!
+          "Stay with us to experience the comfort of home away from home, where every detail is crafted to provide you with a cozy and welcoming environment."
+"Our aim is to ensure your stay with us is synonymous with the warmth and comfort you'd expect from your own home, creating lasting memories and a sense of belonging."
           </p>
-          <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-400">
-            Get it free on Github and please help us spread the news with a
-            Star!
-          </p>
-          <a
+  
+          {/* <a
             href="https://github.com/creativetimofficial/notus-react?ref=nr-index"
             target="_blank"
             className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
           >
             Github Star
-          </a>
+          </a> */}
         </div>
 
         <div className="w-full md:w-4/12 px-4 mr-auto ml-auto mt-32 relative">
-          <i className="fab fa-github text-blueGray-700 absolute -top-150-px -right-100 left-auto opacity-80 text-55"></i>
+        {/* <i class="fa-solid fa-house-chimney"></i> */}
+          <i className="fa-solid fa-house-chimney text-blueGray-700 absolute -top-150-px -right-100 left-auto opacity-80 text-45"></i>
         </div>
       </div>
     </div>
@@ -616,7 +605,7 @@ function Home() {
             </span>
           </p>
           <h3 className="font-semibold text-3xl">
-            Do you love out PG?
+            Do you like our PG?
           </h3>
           <p className="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
           "Ready to experience the warmth and comfort of Our PG? Book now and secure your spot in our vibrant community! Whether you're a student seeking a peaceful study environment or a professional in need of a cozy retreat after a long day's work, Our PG offers the perfect blend of comfort, convenience, and camaraderie."
@@ -630,15 +619,14 @@ function Home() {
             >
               Get started
             </a> */}
-            <a
-              href="https://github.com/creativetimofficial/notus-react?ref=nr-index"
-              target="_blank"
-              className="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+            
+            <Link
+              to="/selectproperty"
+              className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
             >
-              {/* <i className="fab fa-github text-lg mr-1"></i> */}
-              <span>Book Now</span>
+              Book Now
               <i className="fas fa-solid fa-arrow-right ml-3"></i>
-            </a>
+            </Link>
           </div>
           <div className="text-center mt-16"></div>
         </div>

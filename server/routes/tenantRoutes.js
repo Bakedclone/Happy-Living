@@ -1,6 +1,6 @@
 import express from "express";
 import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
-import { addTenant, countDeposite, deleteTenant, getMyInfo, updateTenant } from "../controllers/tenantController.js";
+import { addTenant, countDeposite, deleteTenant, getAllTenants, getMyInfo, updateTenant } from "../controllers/tenantController.js";
 
 const router = express.Router();
 
@@ -12,6 +12,10 @@ router.route("/admin/updatetenant").post(isAuthenticated, authorizeAdmin, update
 
 // Delete Tenant
 router.route("/admin/deletetenant").post(isAuthenticated, authorizeAdmin, deleteTenant);
+
+// Get All Tenants
+router.route("/admin/getalltenants").get(isAuthenticated, authorizeAdmin, getAllTenants);
+
 
 // Count Deposite
 router.route("/countdeposite").put(isAuthenticated, countDeposite);

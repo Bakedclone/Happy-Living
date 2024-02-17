@@ -1,4 +1,4 @@
-import { RemoveTenantFail, RemoveTenantRequest, RemoveTenantSuccess, addTenantFail, addTenantRequest, addTenantSuccess, loadTenantFail, loadTenantRequest, loadTenantSuccess, updateTenantFail, updateTenantRequest, updateTenantSuccess } from "./../reducer/tenantSlicer.js";
+import { RemoveTenantFail, RemoveTenantRequest, RemoveTenantSuccess, addTenantFail, addTenantRequest, addTenantSuccess, getAllTenantFail, getAllTenantRequest, getAllTenantSuccess, loadTenantFail, loadTenantRequest, loadTenantSuccess, updateTenantFail, updateTenantRequest, updateTenantSuccess } from "./../reducer/tenantSlicer.js";
 import { server } from "./../store.js";
 import axios from 'axios'
 
@@ -61,5 +61,18 @@ export const removeTenant = (UserID) => async (dispatch) => {
         dispatch(RemoveTenantSuccess(data));
     } catch (error) { 
         dispatch(RemoveTenantFail(error.response.data.message));
+    }
+}
+
+export const getAllTenants = () => async (dispatch) => {
+    try {
+        dispatch(getAllTenantRequest());
+        const { data } = await axios.get(`${server}/admin/getalltenants`, {
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(getAllTenantSuccess(data));
+    } catch (error) { 
+        dispatch(getAllTenantFail(error.response.data.message));
     }
 }

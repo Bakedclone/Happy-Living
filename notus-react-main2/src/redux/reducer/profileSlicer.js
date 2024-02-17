@@ -13,7 +13,7 @@ export const profileSlice = createSlice({
     },
     updateProfileSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
     },
     updateProfileFail: (state, action) => {
       state.loading = false;
@@ -39,7 +39,7 @@ export const profileSlice = createSlice({
     },
     updateProfilePictureSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
     },
     updateProfilePictureFail: (state, action) => {
       state.loading = false;
@@ -52,7 +52,7 @@ export const profileSlice = createSlice({
     },
     updateaadharSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
     },
     updateaadharFail: (state, action) => {
       state.loading = false;
@@ -65,7 +65,7 @@ export const profileSlice = createSlice({
     },
     updatePanSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.message = action.payload.message;
     },
     updatePanFail: (state, action) => {
       state.loading = false;
@@ -97,7 +97,7 @@ export const { updateProfileRequest,
     updatePanRequest,
     updatePanSuccess,
     updatePanFail,
-    clearErrorP,
-    clearMessageP } = profileSlice.actions
+    clearError,
+    clearMessage } = profileSlice.actions
 
 export default profileSlice.reducer

@@ -79,7 +79,7 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Layout Pages
+              Admin Overview
             </h6>
             {/* Navigation */}
 
@@ -106,75 +106,35 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/settings") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/settings"
-                >
-                  <i
-                    className={
-                      "fas fa-tools mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/settings") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Settings
-                </Link>
-              </li>
+  
 
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/tables") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/tables"
-                >
-                  <i
-                    className={
-                      "fas fa-table mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/tables") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Tables
-                </Link>
-              </li>
-
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/maps") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/maps"
-                >
-                  <i
-                    className={
-                      "fas fa-map-marked mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/maps") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Maps
-                </Link>
+              {/* <li className="items-center">
                 <Link
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   to="/admin/viewuser"
                 >
                   <i className="fas fa-solid fa-user-plus text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  View User
+                </Link>
+              </li> */}
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/viewuser") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/viewuser"
+                >
+                  <i
+                    className={
+                      "fas fa-user mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/viewuser") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
                   View User
                 </Link>
               </li>
@@ -217,7 +177,7 @@ export default function Sidebar() {
                   }
                   to="/admin/updatetenants"
                 >
-                  <i className={"fas fa-solid fa-user-plus mr-2 text-sm " +
+                  <i className={"fas fa-solid fa-user-gear mr-2 text-sm " +
                     (window.location.href.indexOf("/admin/updatetenants") !== -1
                       ? "opacity-75"
                       : "text-blueGray-300")
@@ -228,10 +188,19 @@ export default function Sidebar() {
               
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/removetenants") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
                   to="/admin/removetenants"
                 >
-                  <i className="fas fa-solid fa-user-plus text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className={"fas fa-solid fa-user-minus mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/removetenants") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
                   Remove Tenants
                 </Link>
               </li>
@@ -245,7 +214,7 @@ export default function Sidebar() {
                   }
                   to="/admin/viewtenants"
                 >
-                  <i className={"fas fa-solid fa-user-plus mr-2 text-sm " +
+                  <i className={"fas fa-solid fa-users mr-2 text-sm " +
                     (window.location.href.indexOf("/admin/viewtenants") !== -1
                       ? "opacity-75"
                       : "text-blueGray-300")
@@ -303,7 +272,7 @@ export default function Sidebar() {
                   }
                   to="/admin/addrooms"
                 >
-                  <i className={"fas fa-solid fa-building-circle-check mr-2 text-sm " +
+                  <i className={"fas fa-solid fa-house-chimney-medical mr-2 text-sm " +
                     (window.location.href.indexOf("/admin/addrooms") !== -1
                       ? "opacity-75"
                       : "text-blueGray-300")
@@ -314,20 +283,38 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/removeroom") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
                   to="/admin/removeroom"
                 >
-                  <i className="fas fa-solid fa-house-circle-xmark text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className={"fas fa-solid fa-house-circle-xmark mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/removeroom") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
                   Remove Rooms
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/getavailablerooms") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
                   to="/admin/getavailablerooms"
                 >
-                  <i className="fas fa-solid fa-house-circle-check text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className={"fas fa-solid fa-house-circle-check mr-2 text-sm " +
+                    (window.location.href.indexOf("/admin/getavailablerooms") !== -1
+                      ? "opacity-75"
+                      : "text-blueGray-300")
+                  }></i>{" "}
                   Get Available Rooms
                 </Link>
               </li>
@@ -342,7 +329,7 @@ export default function Sidebar() {
                   }
                   to="/admin/updaterooms"
                 >
-                  <i className={"fas fa-solid fa-building-circle-check mr-2 text-sm " +
+                  <i className={"fas fa-solid fa-house-circle-exclamation mr-2 text-sm " +
                     (window.location.href.indexOf("/admin/updaterooms") !== -1
                       ? "opacity-75"
                       : "text-blueGray-300")

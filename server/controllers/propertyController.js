@@ -64,3 +64,13 @@ export const getAllProperty = catchAsyncError(async (req, res, next)=> {
         property,
     });
 })
+
+export const getProperty = catchAsyncError(async (req, res, next)=> {
+    
+    const property = await Property.findOne({_id : req.body._id});
+
+    res.status(200).json({
+        success: true,
+        property,
+    });
+})

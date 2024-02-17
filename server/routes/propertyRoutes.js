@@ -1,5 +1,5 @@
 import express from "express";
-import { addProperty, getAllProperty } from "../controllers/propertyController.js";
+import { addProperty, getAllProperty, getProperty } from "../controllers/propertyController.js";
 import { multipleUpload } from "../middlewares/multer.js";
 import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
 
@@ -10,5 +10,8 @@ router.route("/addproperty").post(isAuthenticated, authorizeAdmin, multipleUploa
 
 // Get All Property
 router.route("/getallproperty").get(getAllProperty);
+
+// Get Property
+router.route("/getproperty").post(getProperty);
 
 export default router;

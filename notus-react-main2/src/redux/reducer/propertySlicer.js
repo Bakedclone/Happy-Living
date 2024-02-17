@@ -19,6 +19,17 @@ export const propertySlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        getSelectedPropertyRequest: (state) => {
+            state.loading = true;
+        },
+        getSelectedPropertySuccess: (state, action) => {
+            state.loading = false;
+            state.SelectedProperty = action.payload;
+        },
+        getSelectedPropertyFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
         addPropertyRequest: (state) => {
             state.loading = true;
         },
@@ -45,6 +56,9 @@ export const { getPropertyRequest,
     addPropertyRequest,
     addPropertySuccess,
     addPropertyFail,
+    getSelectedPropertyRequest,
+    getSelectedPropertySuccess,
+    getSelectedPropertyFail,
     clearError,
     clearMessage } = propertySlice.actions
 

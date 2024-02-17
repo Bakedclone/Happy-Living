@@ -4,12 +4,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import toast, {Toaster} from "react-hot-toast";
 
 import { updateAadhar, updatePan, updateProfile, updateProfilePicture } from "../../redux/actions/profile.js";
-import { clearError, clearMessage } from "./../../redux/reducer/userSlicer.js";
+import { clearError, clearMessage } from "./../../redux/reducer/profileSlicer.js";
 
 // components
 
 export default function CardUpdateProfile() {
-  const { isAuthenticated, user, error, message } = useSelector(state => state.user);
+  const { user } = useSelector(state => state.user);
+  const { error, message } = useSelector(state => state.profile);
   const [email, setEmail] = useState(user?user.email:"");
   const [name, setName] = useState(user?user.name:"");
   const [address, setAddress] = useState(user?user.address:"");
@@ -68,8 +69,6 @@ export default function CardUpdateProfile() {
       myform.append('file', imagePan);
       dispatch(updatePan(myform));
     }
-    history.push('/');
-
   };
 
   const [imageAadhar, setImageAadhar] = useState(null);
@@ -279,7 +278,7 @@ export default function CardUpdateProfile() {
               type="button"
               onClick={UploadPhotoHandler}
             >
-              Update Profile
+              Upload Images
             </button>
           </div>
         </div>
@@ -304,13 +303,6 @@ export default function CardUpdateProfile() {
                   />
                   {image && <img src={imagePrev} alt="Uploaded" style={{ maxWidth: '100%' }} />}
                 </div>
-                <button
-                  className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={UploadPhotoHandler}
-                >
-                  Update Photo
-                </button>
               </div>
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
@@ -327,13 +319,6 @@ export default function CardUpdateProfile() {
                   />
                   {image && <img src={imageAadharPrev} alt="Uploaded" style={{ maxWidth: '100%' }} />}
                 </div>
-                <button
-                  className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={UploadAadharHandler}
-                >
-                  Upload Aadhar
-                </button>
               </div>
               <div className="w-full lg:w-6/12 px-4 py-10">
                 <div className="relative w-full mb-3">
@@ -350,13 +335,6 @@ export default function CardUpdateProfile() {
                   />
                   {image && <img src={imagePanPrev} alt="Uploaded" style={{ maxWidth: '100%' }} />}
                 </div>
-                <button
-                  className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={UploadPanHandler}
-                >
-                  Update Photo
-                </button>
               </div>
             </div>
           </form>

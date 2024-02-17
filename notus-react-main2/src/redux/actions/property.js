@@ -1,4 +1,4 @@
-import { addPropertyFail, addPropertyRequest, addPropertySuccess, getPropertyFail, getPropertyRequest, getPropertySuccess } from "./../reducer/propertySlicer.js";
+import { addPropertyFail, addPropertyRequest, addPropertySuccess, getPropertyFail, getPropertyRequest, getPropertySuccess, getSelectedPropertyFail, getSelectedPropertyRequest, getSelectedPropertySuccess } from "./../reducer/propertySlicer.js";
 import { server } from "./../store.js";
 import axios from 'axios'
 
@@ -10,6 +10,22 @@ export const getAllProperty = () => async (dispatch) => {
         dispatch(getPropertySuccess(data.property));
     } catch (error) {
         dispatch(getPropertyFail(error.response.data.message));
+    }
+}
+
+export const getSelectedProperty = (_id) => async (dispatch) => {
+    try {
+        dispatch(getSelectedPropertyRequest());
+        const { data } = await axios.post(`${server}/getproperty`, { _id }, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(getSelectedPropertySuccess(data.property));
+    } catch (error) {
+        dispatch(getSelectedPropertyFail(error.response.data.message));
     }
 }
 
