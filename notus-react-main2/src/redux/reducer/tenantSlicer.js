@@ -31,6 +31,18 @@ export const tenantSlice = createSlice({
       state.error = action.payload;
     },
 
+    countDepositeRequest: (state) => {
+      state.loading = true;
+    },
+    countDepositeSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    countDepositeFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     addTenantRequest: (state) => {
       state.loading = true;
     },
@@ -92,6 +104,9 @@ export const {
   getAllTenantRequest,
   getAllTenantSuccess,
   getAllTenantFail,
+  countDepositeRequest,
+  countDepositeSuccess,
+  countDepositeFail,
   clearError,
   clearMessage } = tenantSlice.actions
 

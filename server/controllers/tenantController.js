@@ -162,12 +162,19 @@ export const updateTenant = catchAsyncError(async(req, res, next)=> {
 
 export const countDeposite = catchAsyncError(async(req, res, next)=> {
     
-    const tenant = await Tenants.findOne({UserID: req.user._id});
+    const tenant = await Tenants.findOne({UserID: req.body._id});
 
     if(tenant.PendingRent > 0) {
         res.status(200).json({
         success: true,
         message: `Your Rent is pending. Please Pay your pending rent then you can apply.`,
+        });
+    }
+
+    if(tenant.DepositCount === true) {
+        res.status(200).json({
+        success: true,
+        message: `Your Deposite is Already Counted.`,
         });
     }
 

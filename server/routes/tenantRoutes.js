@@ -18,7 +18,7 @@ router.route("/admin/getalltenants").get(isAuthenticated, authorizeAdmin, getAll
 
 
 // Count Deposite
-router.route("/countdeposite").put(isAuthenticated, countDeposite);
+router.route("/countdeposite").post(isAuthenticated, countDeposite);
 
 // Get Info
 router.route("/myinfo").get(isAuthenticated, getMyInfo);

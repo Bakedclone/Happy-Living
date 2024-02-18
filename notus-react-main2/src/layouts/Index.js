@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import toast, {Toaster} from "react-hot-toast";
 
 import { clearError, clearMessage } from "./../redux/reducer/userSlicer.js";
+import { clearError as clearErrorT, clearMessage as clearMessageT} from "./../redux/reducer/tenantSlicer.js";
 import { loadUser } from "./../redux/actions/user.js";
 
 // Views
@@ -22,6 +23,8 @@ import PaymentSuccess from "views/payment/PaymentSuccess.js";
 function Index() {
 
   const {isAuthenticated, user, error, message} = useSelector(state=>state.user);
+  // const {error, message} = useSelector(state=>state.tenant);
+  const {error: customError, message: customMessage} = useSelector(state => state.tenant);
 
   const dispatch = useDispatch();
   useEffect(()=> {
@@ -33,7 +36,15 @@ function Index() {
       toast.success(message);
       dispatch(clearMessage());
     }
-  },[dispatch, error, message]);
+    if(customMessage) {
+      toast.success(customMessage);
+      dispatch(clearMessageT());
+    }
+    if(customError) {
+      toast.error(customError);
+      dispatch(clearErrorT());
+    }
+  },[dispatch, error, message, customError, customMessage]);
 
 
   useEffect(()=>{

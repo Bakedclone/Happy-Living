@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from 'react-redux';
 import  { logout } from "./../../redux/actions/user.js";
 import { useHistory } from 'react-router-dom';
-
+import { countDeposite } from "./../../redux/actions/tenant.js";
 const IndexDropdown = ({isAuthenticated, user}) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -21,6 +21,8 @@ const IndexDropdown = ({isAuthenticated, user}) => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+
   const history = useHistory();
   const dispatch = useDispatch();
   const logoutHandler = (e)=>{
@@ -28,6 +30,10 @@ const IndexDropdown = ({isAuthenticated, user}) => {
     dispatch(logout());
     closeDropdownPopover();
     history.push('/');
+  }
+  const countdepositehandler = (e) => {
+    e.preventDefault();
+    dispatch(countDeposite(user._id));
   }
   return (
     <>
@@ -75,7 +81,7 @@ const IndexDropdown = ({isAuthenticated, user}) => {
           >
             Dashboard
           </Link>
-          <Link
+          {/* <Link
             to="/admin/settings"
             className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           >
@@ -92,7 +98,7 @@ const IndexDropdown = ({isAuthenticated, user}) => {
             className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           >
             Maps
-          </Link>
+          </Link> */}
         </span>) : (<></>)}
       <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
       <span
@@ -133,9 +139,9 @@ const IndexDropdown = ({isAuthenticated, user}) => {
             Pay Rent
           </Link>
           <Link
-            to="/admin/settings"
+            onClick={countdepositehandler}
             className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            onClick={closeDropdownPopover}
+            // onClick={closeDropdownPopover}
           >
             Count Deposite
           </Link>

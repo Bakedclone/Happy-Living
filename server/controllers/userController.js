@@ -219,7 +219,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next)=> {
     const resetToken = await user.getResetToken();
     
     await user.save();
-    const url = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+    const url = `${process.env.FRONTEND_URL}/auth/resetpassword/${resetToken}`;
     const message = `Click on the link to reset your password. ${url}. If you have not request then please ignore.`;
 
     await sendEmail(user.email, "HappyLiving Reset Password", message);

@@ -164,7 +164,7 @@ export default function Profile() {
                     <div className="relative">
                       <img
                         alt="..."
-                        src={user ? user.photo.url : ""}
+                        src={user && user.photo ? user.photo.url : Avatar}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
@@ -253,7 +253,7 @@ export default function Profile() {
                   >
                     Pan Card
                   </label>
-                  <img src={user && user.pancard ? user.pancard.url : ""} alt="Not Uploaded" style={{ maxWidth: '100%' }} />
+                  <img src={user && user.pancard? user.pancard.url : ""} alt="Not Uploaded" style={{ maxWidth: '100%' }} />
                 </div>
               </div>
             </div>

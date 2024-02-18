@@ -1,4 +1,4 @@
-import { updatePanFail, updatePanRequest, updatePanSuccess, updateProfileRequest, updateaadharFail, updateaadharRequest, updateaadharSuccess } from "./../reducer/profileSlicer.js";
+import { forgetPasswordFail, forgetPasswordRequest, forgetPasswordSuccess, resetPasswordFail, resetPasswordRequest, resetPasswordSuccess, updatePanFail, updatePanRequest, updatePanSuccess, updateProfileRequest, updateaadharFail, updateaadharRequest, updateaadharSuccess } from "./../reducer/profileSlicer.js";
 import { server } from "./../store.js";
 import axios from 'axios';
 import { updateProfileSuccess } from "./../reducer/profileSlicer.js";
@@ -41,6 +41,38 @@ export const changePassword = (oldpassword, newpassword) => async (dispatch) => 
     } catch (error) {
         dispatch(changePasswordFail(error.response.data.message));
 
+    }
+};
+
+export const forgotPassword = (email) => async (dispatch) => {
+    try {
+        dispatch(forgetPasswordRequest());
+        const { data } = await axios.post(`${server}/forgetpassword`, { email }, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(forgetPasswordSuccess(data));
+    } catch (error) {
+        dispatch(forgetPasswordFail(error.response.data.message));
+    }
+}
+
+export const resetPassword = (token, password) => async (dispatch) => {
+    try {
+        dispatch(resetPasswordRequest());
+        const { data } = await axios.put(`${server}/resetpassword/${token}`, { password }, {
+            headers: {
+                "Content-type": "application/json"
+            },
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(resetPasswordSuccess(data));
+    } catch (error) {
+        dispatch(resetPasswordFail(error.response.data.message));
     }
 }
 

@@ -1,4 +1,4 @@
-import { RemoveTenantFail, RemoveTenantRequest, RemoveTenantSuccess, addTenantFail, addTenantRequest, addTenantSuccess, getAllTenantFail, getAllTenantRequest, getAllTenantSuccess, loadTenantFail, loadTenantRequest, loadTenantSuccess, updateTenantFail, updateTenantRequest, updateTenantSuccess } from "./../reducer/tenantSlicer.js";
+import { RemoveTenantFail, RemoveTenantRequest, RemoveTenantSuccess, addTenantFail, addTenantRequest, addTenantSuccess, countDepositeFail, countDepositeRequest, countDepositeSuccess, getAllTenantFail, getAllTenantRequest, getAllTenantSuccess, loadTenantFail, loadTenantRequest, loadTenantSuccess, updateTenantFail, updateTenantRequest, updateTenantSuccess } from "./../reducer/tenantSlicer.js";
 import { server } from "./../store.js";
 import axios from 'axios'
 
@@ -74,5 +74,21 @@ export const getAllTenants = () => async (dispatch) => {
         dispatch(getAllTenantSuccess(data));
     } catch (error) { 
         dispatch(getAllTenantFail(error.response.data.message));
+    }
+}
+
+export const countDeposite = (_id) => async (dispatch) => {
+    try {
+        dispatch(countDepositeRequest());
+        const { data } = await axios.post(`${server}/countdeposite`,{_id}, {
+            headers: {
+                "Content-type": "application/json",
+            },
+            withCredentials: true,
+        });
+        console.log(data);
+        dispatch(countDepositeSuccess(data));
+    } catch (error) { 
+        dispatch(countDepositeFail(error.response.data.message));
     }
 }

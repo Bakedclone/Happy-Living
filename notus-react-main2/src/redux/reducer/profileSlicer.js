@@ -32,7 +32,33 @@ export const profileSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    
+
+    // forgot Password
+    forgetPasswordRequest: (state) => {
+      state.loading = true;
+    },
+    forgetPasswordSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    forgetPasswordFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    // reset Password
+    resetPasswordRequest: (state) => {
+      state.loading = true;
+    },
+    resetPasswordSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    resetPasswordFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     // update profile
     updateProfilePictureRequest: (state) => {
       state.loading = true;
@@ -83,21 +109,27 @@ export const profileSlice = createSlice({
 })
 
 export const { updateProfileRequest,
-    updateProfileSuccess,
-    updateProfileFail,
-    changePasswordRequest,
-    changePasswordSuccess,
-    changePasswordFail,
-    updateProfilePictureRequest,
-    updateProfilePictureSuccess,
-    updateProfilePictureFail,
-    updateaadharRequest,
-    updateaadharSuccess,
-    updateaadharFail,
-    updatePanRequest,
-    updatePanSuccess,
-    updatePanFail,
-    clearError,
-    clearMessage } = profileSlice.actions
+  updateProfileSuccess,
+  updateProfileFail,
+  changePasswordRequest,
+  changePasswordSuccess,
+  changePasswordFail,
+  forgetPasswordRequest,
+  forgetPasswordSuccess,
+  forgetPasswordFail,
+  resetPasswordRequest,
+  resetPasswordSuccess,
+  resetPasswordFail,
+  updateProfilePictureRequest,
+  updateProfilePictureSuccess,
+  updateProfilePictureFail,
+  updateaadharRequest,
+  updateaadharSuccess,
+  updateaadharFail,
+  updatePanRequest,
+  updatePanSuccess,
+  updatePanFail,
+  clearError,
+  clearMessage } = profileSlice.actions
 
 export default profileSlice.reducer
