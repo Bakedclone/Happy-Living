@@ -1,13 +1,15 @@
 import { Rooms } from "../models/Rooms.js";
 import ErrorHandler from "../utils/errorHandler.js"
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
+
+// Model Import
 import { Property } from "../models/Property.js";
 
 export const getAllRooms = async (req, res, next) => {
     const rooms = await Rooms.find();
     res.status(200).json({
         success: true,
-        // Rooms,
+        rooms,
     });
 };
 
@@ -62,13 +64,15 @@ export const removeRoom = catchAsyncError(async(req, res, next)=> {
 
 export const updateRoom = catchAsyncError(async (req, res, next)=> {
     
-    const { SharingCapacity, Occupied, facilities, description } = req.body;
+    const { Propertyid, MonthlyRent, SharingCapacity, Occupied, facilities, description } = req.body;
 
     const room = await Rooms.findById(req.body._id);
     if(!room)
         return next(new ErrorHandler("Room Not Found", 400));
     
     if(SharingCapacity) room.SharingCapacity = SharingCapacity;
+    if(Propertyid) room.Propertyid = Propertyid;
+    if(MonthlyRent) room.MonthlyRent = MonthlyRent;
     if(Occupied) room.Occupied = Occupied;
     if(facilities) {
         const myArray = facilities.split(",");

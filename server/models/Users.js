@@ -12,7 +12,6 @@ const schema = new mongoose.Schema({
     },
     name:{
         type:String,
-        // required:[true, "Please enter your First Name"]
     },
     email:{
         type:String,
@@ -40,31 +39,25 @@ const schema = new mongoose.Schema({
     photo: {
         public_id : {
             type: String,
-            // required: true,
         },
         url: {
             type: String,
-            // required: true,
         }
     },
     aadharcard: {
         public_id : {
             type: String,
-            // required: true,
         },
         url: {
             type: String,
-            // required: true,
         }
     },
     pancard: {
         public_id : {
             type: String,
-            // required: true,
         },
         url: {
             type: String,
-            // required: true,
         }
     },
     subscription: {
@@ -75,15 +68,6 @@ const schema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    // playlist: [
-    //     {
-    //         course: {
-    //             type: mongoose.Schema.Types.ObjectId,
-    //             ref: "Course",
-    //         },
-    //         poster: String,
-    //     },
-    // ],
     resetPasswordToken: String, 
     resetPasswordExpire: String,
 
@@ -102,7 +86,6 @@ schema.methods.getJWTToken = function() {
 };
 
 schema.methods.comparePassword = async function(password) {
-    console.log(this.password);
     return await bcrypt.compare(password, this.password)
 };
 

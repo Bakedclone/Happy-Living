@@ -16,7 +16,6 @@ router.route("/admin/deletetenant").post(isAuthenticated, authorizeAdmin, delete
 // Get All Tenants
 router.route("/admin/getalltenants").get(isAuthenticated, authorizeAdmin, getAllTenants);
 
-
 // Count Deposite
 router.route("/countdeposite").post(isAuthenticated, countDeposite);
 

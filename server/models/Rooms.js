@@ -7,7 +7,6 @@ const schema = new mongoose.Schema({
     _id:{
         type:String,
         required:[true, "Please enter your Room No."],
-        // maxLength:[6, "Room No. must be atmost 6 character"]
     },
     Propertyid: {
         type: mongoose.Schema.Types.String,

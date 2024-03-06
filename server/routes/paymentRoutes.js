@@ -7,15 +7,11 @@ const router = express.Router();
 // Buy Subscription
 router.route("/subscribe").get(isAuthenticated,buySubscription);
 
-
+// Paynow
 router.route("/paynow").post(payNow);
 
 // Verify Payment and save
-// router.route("/paymentverifiaction").post(isAuthenticated,paymentVerification);
 router.route("/paymentverifiaction").post(isAuthenticated,paymentVerification);
-
-// Update payment
-// router.route("/paymentsuccess").put(isAuthenticated,PaymentSuccess);
 
 // Get Razorpay key
 router.route("/razorpaykey").get(getRazorPayKey);

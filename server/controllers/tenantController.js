@@ -1,15 +1,11 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../utils/errorHandler.js"
-import { Property } from "../models/Property.js";
+
+// Models Import
 import { Users } from "../models/Users.js";
 import { Rooms } from "../models/Rooms.js";
 import { Tenants } from "../models/Tenants.js";
 import { Payment } from "../models/Payment.js";
-import { sendEmail } from "../utils/sendEmail.js";
-import { sendToken } from "../utils/sendToken.js";
-import crypto from "crypto";
-import cloudinary from "cloudinary";
-import getDataUri from "../utils/dataUri.js";
 import { PastTenants } from "../models/PastTenants.js";
 import { Stats } from "./../models/Stats.js";
 
@@ -197,6 +193,13 @@ export const deleteTenant = catchAsyncError(async(req, res, next)=> {
     
     const tenant = await Tenants.findOne({UserID: userid});
 
+    if(!tenant) {
+        res.status(404).json({
+            success: false,
+            message: "User Not Found.",
+        });
+    }
+
     await tenant.deleteOne();
 
     res.status(200).json({
@@ -284,8 +287,7 @@ Tenants.watch().on("change", async()=>{
     
     const tenants = await Tenants.find({ Status: "Active" });
     const stats = await Stats.findOne({}).sort({ createdAt: "desc"}).limit(1);
-    // console.log(tenants.length);
-
+    
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
 

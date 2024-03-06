@@ -1,11 +1,13 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
-import { Users } from "../models/Users.js";
 import ErrorHandler from "../utils/errorHandler.js"
 import { sendEmail } from "../utils/sendEmail.js";
 import { sendToken } from "../utils/sendToken.js";
 import crypto from "crypto";
 import cloudinary from "cloudinary";
 import getDataUri from "../utils/dataUri.js";
+
+// Model Import
+import { Users } from "../models/Users.js";
 
 export const register = catchAsyncError(async(req, res, next)=> {
 
@@ -15,24 +17,14 @@ export const register = catchAsyncError(async(req, res, next)=> {
     return next(new ErrorHandler("Enter all fields", 400));
 
     let user = await Users.findOne({ email });
-    // user = await Users.findOne({ _id });
 
     if (user) return next(new ErrorHandler("User already exist", 409));
 
-    // Upload file on cloud
-    // const file = req.file;
-    // console.log(file);
-    // const fileUri = getDataUri(file);
-    // const mycloud = await cloudinary.v2.uploader.upload(fileUri.content);
 
     user = await Users.create({
         _id,
         email,
         password,
-        // photo: {
-        //     public_id: mycloud.public_id,
-        //     url: mycloud.secure_url,
-        // }
     })
 
     sendToken(res, user, "Registered Successfully.", 201);
@@ -291,7 +283,7 @@ export const updateUserType = catchAsyncError(async (req, res, next)=> {
     const user = await Users.findById(req.params.id);
 
     if(user.type === "user") user.type = "admin";
-    else user.type = "user";
+    // else user.type = "user"; 
 
     await user.save();
 

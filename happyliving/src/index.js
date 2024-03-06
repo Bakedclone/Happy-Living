@@ -1,41 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-// import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Provider } from 'react-redux';
+import { store } from "./redux/store";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "assets/styles/tailwind.css";
 
+// layouts
 
-import Home from './pages/home';
-import Login from './Components/Auth/login';
-import Register from './Components/Auth/register';
+import Admin from "layouts/Admin.js";
+import Auth from "layouts/Auth.js";
+import Index from "layouts/Index";
 
-import reportWebVitals from './reportWebVitals';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import { GoogleOAuthProvider } from '@react-oauth/google';
+// views without layouts
+import Profile from "views/Profile.js";
+import UpdateProfile from "views/Updateprofile.js";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-]);
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <GoogleOAuthProvider clientId="403861446560-eiqnq97vml7fmis1a36qu5v3nc01j6jt.apps.googleusercontent.com">
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </GoogleOAuthProvider>
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        {/* add routes with layouts */}
+        <Route path="/admin" component={Admin} />
+        <Route path="/auth" component={Auth} />
+        <Route path="/" component={Index} />
+        {/* add routes without layouts */}
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/updateprofile" exact component={UpdateProfile} />
+        <Redirect from="*" to="/" />
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
 );
-
-reportWebVitals();

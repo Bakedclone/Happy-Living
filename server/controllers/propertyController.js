@@ -1,9 +1,10 @@
-import express from "express";
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
-import { Property } from "../models/Property.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from "cloudinary";
+
+// Model Import
+import { Property } from "../models/Property.js";
 
 export const addProperty = async(req, res, next) => {
 

@@ -51,8 +51,7 @@ router.route("/admin/getallusers").get(isAuthenticated, authorizeAdmin, getAllUs
 router.route("/admin/getuser").post(isAuthenticated, authorizeAdmin, getUser);
 
 // UpdateUserType
-router.route("/admin/user/:id").put(isAuthenticated, authorizeAdmin, updateUserType).delete(isAuthenticated, authorizeAdmin, deleteUser);
-
+router.route("/admin/user/:id").get(isAuthenticated, authorizeAdmin, updateUserType).delete(isAuthenticated, authorizeAdmin, deleteUser);
 
 // Request a stay
 router.route("/booknow").post(isAuthenticated, RequestStay);

@@ -1,7 +1,9 @@
 import { catchAsyncError } from "../middlewares/catchAsyncError.js";
-import {Tenants} from "./../models/Tenants.js"
-import {Rooms} from "./../models/Rooms.js"
-import {Payment} from "./../models/Payment.js"
+
+// Models Import
+import { Tenants } from "./../models/Tenants.js"
+import { Rooms } from "./../models/Rooms.js"
+import { Payment } from "./../models/Payment.js"
 import { Stats } from "./../models/Stats.js"
 
 export const dashboardData = catchAsyncError(async (req, res, next) => {
@@ -20,22 +22,21 @@ export const dashboardData = catchAsyncError(async (req, res, next) => {
                 }
             }
         ]);
-    
+
         try {
             const result = await aggregationQuery.exec();
             const totalRemainingCapacity = result.length > 0 ? result[0].totalRemainingCapacity : 0;
-            console.log("Total remaining capacity:", totalRemainingCapacity);
             return totalRemainingCapacity;
         } catch (err) {
             console.error(err);
         }
     }
-    
+
     async function getTotalAmountPaid() {
         const today = new Date();
         const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
         const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    
+
         try {
             const result = await Payment.aggregate([
                 {
@@ -55,12 +56,12 @@ export const dashboardData = catchAsyncError(async (req, res, next) => {
             console.error(err);
         }
     }
-    
+
     async function getTotalTenantsCheckedOut() {
         const today = new Date();
         const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
         const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    
+
         try {
             const result = await Tenants.aggregate([
                 {
@@ -75,12 +76,12 @@ export const dashboardData = catchAsyncError(async (req, res, next) => {
                     }
                 }
             ]).exec();
-            return  (result.length > 0 ? result[0].totalTenants : 0);
+            return (result.length > 0 ? result[0].totalTenants : 0);
         } catch (err) {
             console.error(err);
         }
     }
-    
+
     async function getTotalPendingRent() {
         try {
             const result = await Tenants.aggregate([
@@ -96,11 +97,11 @@ export const dashboardData = catchAsyncError(async (req, res, next) => {
             console.error(err);
         }
     }
-    
-    var PendingRent = await  getTotalPendingRent();
-    
+
+    var PendingRent = await getTotalPendingRent();
+
     var AvailableBeds = await getTotalRemainingCapacity();
-    
+
     var DepositCounts = await getTotalTenantsCheckedOut();
 
     var Revenue = await getTotalAmountPaid();
@@ -108,17 +109,17 @@ export const dashboardData = catchAsyncError(async (req, res, next) => {
     res.status(200).json({
         success: true,
         carddata: {
-        PendingRent,
-        AvailableBeds,
-        DepositCounts,
-        Revenue, 
+            PendingRent,
+            AvailableBeds,
+            DepositCounts,
+            Revenue,
         }
     })
 })
 
 export const getDashboardStats = catchAsyncError(async (req, res, next) => {
 
-    const stats = await Stats.find({}).sort({ createdAt: "desc"}).limit(2);
+    const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(2);
 
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
@@ -126,7 +127,7 @@ export const getDashboardStats = catchAsyncError(async (req, res, next) => {
     var lineChart = [];
     var currRev = [];
     var preRev = [];
-    for(var i=0; i<=currentMonth; i++) {
+    for (var i = 0; i <= currentMonth; i++) {
         currRev.push(stats[0].Revenue[i]);
         preRev.push(stats[1].Revenue[i]);
     }
@@ -137,73 +138,13 @@ export const getDashboardStats = catchAsyncError(async (req, res, next) => {
     var prevTen = [];
     var currTen = [];
 
-    for(var i=0; i<=currentMonth; i++) {
+    for (var i = 0; i <= currentMonth; i++) {
         currTen.push(stats[0].Tenant[i]);
         prevTen.push(stats[1].Tenant[i]);
     }
     barChart.push(currTen);
     barChart.push(prevTen);
-    // if(currentMonth >= 0 && currentMonth <=5) {
-
-    //     // Line Char 
-    //     // Curr Year
-    //     var temp = [];
-    //     for(var i=0; i<6; i++){
-    //         temp.push(stats[0].Revenue[i]);
-    //     }
-    //     lineChart.push(temp);
-
-    //     // Prev Year
-    //     temp = [];
-    //     for(var i=0; i<6; i++){
-    //         temp.push(stats[1].Revenue[i]);
-    //     }
-    //     lineChart.push(temp);
-        
-    //     // Bar Chart
-    //     // Curr Year
-    //     temp = [];
-    //     for(var i=0; i<6; i++){
-    //         temp.push(stats[0].Tenant[i]);
-    //     }
-    //     barChart.push(temp);
-        
-    //     // Prev Year
-    //     temp = [];
-    //     for(var i=0; i<6; i++){
-    //         temp.push(stats[1].Tenant[i]);
-    //     }
-    //     barChart.push(temp);
-    // }
-    // else {
-    //     // Line Char 
-    //     // Curr Year
-    //     var temp = [];
-    //     for(var i=6; i<12; i++){
-    //         temp.push(stats[0].Revenue[i]);
-    //     }
-    //     lineChart.push(temp);
-    //     // Prev Year
-    //     temp = [];
-    //     for(var i=6; i<12; i++){
-    //         temp.push(stats[1].Revenue[i]);
-    //     }
-    //     lineChart.push(temp);
-    //     // Bar Chart
-    //     // Curr Year
-    //     temp = [];
-    //     for(var i=6; i<12; i++){
-    //         temp.push(stats[0].Tenant[i]);
-    //     }
-    //     barChart.push(temp);
-    //     // Prev Year
-    //     temp = [];
-    //     for(var i=6; i<12; i++){
-    //         temp.push(stats[1].Tenant[i]);
-    //     }
-    //     barChart.push(temp);
-    // }
-
+    
     res.status(200).json({
         success: true,
         lineChart,
