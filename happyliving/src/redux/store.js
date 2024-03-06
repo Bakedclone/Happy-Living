@@ -19,4 +19,4 @@ export const store = configureStore({
   },
 })
 
-export const server = 'http://localhost:4000/api/v1';
+export const server = 'https://happy-living-api.onrender.com/api/v1';
