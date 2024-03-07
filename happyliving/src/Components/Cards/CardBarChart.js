@@ -102,7 +102,7 @@ export default function CardBarChart(props) {
     };
     let ctx = document.getElementById("bar-chart").getContext("2d");
     window.myBar = new Chart(ctx, config);
-  }, [props.reload]);
+  }, [props.reload, props.values]);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">

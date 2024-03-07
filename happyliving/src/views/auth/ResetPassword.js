@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { resetPassword } from "./../../redux/actions/profile.js";
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { useLocation, useParams } from "react-router-dom/cjs/react-router-dom.min.js";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min.js";
 
 
 export default function ResetPassword() {
@@ -13,7 +12,6 @@ export default function ResetPassword() {
 
   const [newpassword, setnewpassword] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(resetPassword(params.token,newpassword));

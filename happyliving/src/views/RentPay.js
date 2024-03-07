@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 
-import Navbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footers/Footer.js";
 import { useDispatch, useSelector } from "react-redux";
 import { loadTenant } from "./../redux/actions/tenant.js";
 import Paynow from "components/Payment/paynow.js";
 
 export default function RentPay() {
 
-  const {isAuthenticated, user, error, message} = useSelector(state=>state.user);
+  const { user } = useSelector(state=>state.user);
   const {tenant} = useSelector(state=>state.tenant);
   const dispatch = useDispatch();
 
