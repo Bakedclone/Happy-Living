@@ -1,5 +1,5 @@
 import React from 'react'
-import CardAvailableRooms from 'components/Cards/CardAvailableRooms'
+import CardAvailableRooms from 'components/Cards/CardAvailableRooms.js'
 
 function AvailableRooms() {
   return (

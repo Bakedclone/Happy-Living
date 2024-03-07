@@ -1,5 +1,5 @@
 import React from 'react'
-import CardRemoveRoom from 'components/Cards/CardRemoveRoom'
+import CardRemoveRoom from 'components/Cards/CardRemoveRoom.js'
 
 function RemoveRoom() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import CardAddTenants from 'components/Cards/CardAddTenants'
+import CardAddTenants from 'components/Cards/CardAddTenants.js'
 
 function AddTenants() {
   return (

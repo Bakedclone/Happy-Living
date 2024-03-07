@@ -1,5 +1,5 @@
 import React from 'react'
-import CardAddAdmin from 'components/Cards/CardAddAdmin'
+import CardAddAdmin from 'components/Cards/CardAddAdmin.js'
 
 function AddAdmin() {
   return (

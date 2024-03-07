@@ -1,5 +1,5 @@
 import React from 'react'
-import CardViewRooms from 'components/Cards/CardViewRooms'
+import CardViewRooms from 'components/Cards/CardViewRooms.js'
 
 function ViewRooms() {
   return (

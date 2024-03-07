@@ -1,5 +1,5 @@
 import React from 'react'
-import CardRemoveTenant from 'components/Cards/CardRemoveTenant'
+import CardRemoveTenant from 'components/Cards/CardRemoveTenant.js'
 
 function RemoveTenant() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import CardUpdateRoom from 'components/Cards/CardUpdateRoom';
+import CardUpdateRoom from 'components/Cards/CardUpdateRoom.js';
 function UpdateRoom() {
     return (
         <div className="flex flex-wrap mt-4">

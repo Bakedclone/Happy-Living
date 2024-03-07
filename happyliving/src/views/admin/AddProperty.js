@@ -1,5 +1,5 @@
 import React from 'react'
-import CardAddProperty from 'components/Cards/CardAddProperty'
+import CardAddProperty from 'components/Cards/CardAddProperty.js'
 
 function AddProperty() {
   return (

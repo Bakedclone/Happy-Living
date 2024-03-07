@@ -1,5 +1,5 @@
 import React from 'react'
-import CardViewTenants from 'components/Cards/CardViewTenants'
+import CardViewTenants from 'components/Cards/CardViewTenants.js'
 
 function ViewTenants() {
   return (

@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid'
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProperty } from "./../redux/actions/property.js";
 
-import CardAppleWatch from "components/Cards/CardAppleWatch";
+import CardAppleWatch from "components/Cards/CardAppleWatch.js";
 
 function Selectproerty() {
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 // import views
-import CardUpdateProfile from "components/Cards/CardUpdateProfile";
+import CardUpdateProfile from "components/Cards/CardUpdateProfile.js";
 
 export default function Updateprofile() {
 
