@@ -4,11 +4,11 @@ export const sendToken = (res, user, message, statuscode = 200)=>{
     const options = {
         expires: new Date(Date.now() + 1000*60*60*24*15),
         httpOnly: true,
-        // secure: true, 
-        secure: process.env.NODE_ENV === 'PROD' ? true : 'auto',
+        secure: true, 
+        // secure: process.env.NODE_ENV === 'PROD' ? true : 'auto',
         // sameSite: "none",
-        sameSite: process.env.NODE_ENV === 'PROD' ? 'none' : 'lax',
-        domain: process.env.FRONTEND_URL,
+        sameSite: 'lax',
+        domain: 'https://happy-living-api.onrender.com',
     }
     
     res.status(statuscode).cookie("token", token, options).json({
