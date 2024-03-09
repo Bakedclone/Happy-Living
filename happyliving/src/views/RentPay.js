@@ -100,7 +100,7 @@ export default function RentPay() {
                   {
                     (tenant && tenant.PendingRent > 0 ?
                   
-                  <Paynow Rent={(tenant ? tenant.PendingRent : 0)}/> : <></> )}
+                  <Paynow Rent={(tenant ? tenant.PendingRent : 0)} userid = { user ? user._id : ""} email = { user ? user.email : ""} contact = { user ? user.phoneNumber : ""} /> : <></> )}
                 </div>
               </div>
             </div>
