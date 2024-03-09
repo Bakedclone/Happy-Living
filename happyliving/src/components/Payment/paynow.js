@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { server } from 'redux/store';
+import { server } from './../../redux/store.js';
 import logo from './../../assets/img/house.png';
 
 function Paynow(props) {
