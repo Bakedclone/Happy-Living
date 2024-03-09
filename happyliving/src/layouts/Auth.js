@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearError, clearMessage } from "./../redux/reducer/profileSlicer.js";
 import toast, {Toaster} from "react-hot-toast";
+import bg from "./../assets/img/register_bg_2.png";
 
 // components
 
@@ -37,13 +38,11 @@ export default function Auth() {
       <Navbar transparent />
       <main>
         <section className="relative w-full h-full py-40 min-h-screen">
-          <div
+          <img
             className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
-            style={{
-              backgroundImage:
-                "url(" + require("assets/img/register_bg_2.png").default + ")",
-            }}
-          ></div>
+            src={bg}
+            alt=""
+          ></img>
           <Switch>
             <Route path="/auth/login" exact component={Login} />
             <Route path="/auth/register" exact component={Register} />

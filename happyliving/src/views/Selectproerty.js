@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Grid from '@mui/material/Grid'
-import { BarLoader } from "react-spinners";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProperty } from "./../redux/actions/property.js";
+import PreLoader from "./PreLoader.js";
 
 import CardAppleWatch from "components/Cards/CardAppleWatch.js";
 
@@ -18,7 +19,7 @@ function Selectproerty() {
   const [selectedArea, setSelectedArea] = useState('Choose a Area');
 
   return (<>
-  {loading ? <BarLoader color="#0782f6"/> :
+  {loading ?  <PreLoader />: <></>}
     <div className="container mt-20 mx-auto items-center flex flex-wrap">
       <div className="flex flex-wrap justify-center bg-white shadow-xl rounded-lg mt-15 py-16 px-12 relative z-10 ">
         <div className="w-full text-center lg:w-8/12">
@@ -57,7 +58,7 @@ function Selectproerty() {
           ))}
         </Grid>
       </div>
-    </div>}
+    </div>
   </>
   )
 }

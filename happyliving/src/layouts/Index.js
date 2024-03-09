@@ -19,10 +19,11 @@ import Profile from "views/Profile.js";
 import Updateprofile from "views/Updateprofile.js";
 import RentPay from "views/RentPay.js";
 import PaymentSuccess from "views/payment/PaymentSuccess.js";
+import PreLoader from "views/PreLoader.js";
 
 function Index() {
 
-  const { isAuthenticated, user, error, message } = useSelector(state => state.user);
+  const { isAuthenticated, user, error, message, loading } = useSelector(state => state.user);
   const { error: customError, message: customMessage } = useSelector(state => state.tenant);
 
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function Index() {
 
   return (
     <>
+    {loading ?  <PreLoader />: <></>}
       <IndexNavbar fixed isAuthenticated={isAuthenticated} user={user} />
       <Switch>
         <Route path="/" exact component={Home} />

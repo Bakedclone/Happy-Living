@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import toast, {Toaster} from "react-hot-toast";
-
+import PreLoader from "views/PreLoader.js";
 import { updateAadhar, updatePan, updateProfile, updateProfilePicture } from "../../redux/actions/profile.js";
 import { clearError, clearMessage } from "./../../redux/reducer/profileSlicer.js";
 
 export default function CardUpdateProfile() {
 
-  const { user } = useSelector(state => state.user);
+  const { user, loading } = useSelector(state => state.user);
   const { error, message } = useSelector(state => state.profile);
   const [email, setEmail] = useState(user?user.email:"");
   const [name, setName] = useState(user?user.name:"");
@@ -102,6 +102,7 @@ export default function CardUpdateProfile() {
 
   return (
     <>
+    {loading ?  <PreLoader />: <></>}
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">

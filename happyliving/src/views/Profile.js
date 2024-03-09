@@ -3,10 +3,11 @@ import React, { useEffect } from "react";
 import Avatar from "./../assets/img/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./../redux/actions/user";
+import PreLoader from "./PreLoader";
 
 export default function Profile() {
 
-  const { user } = useSelector(state=>state.user);
+  const { user, loading } = useSelector(state=>state.user);
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -15,6 +16,7 @@ export default function Profile() {
 
   return (
     <>
+    {loading ?  <PreLoader />: <></>}
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
