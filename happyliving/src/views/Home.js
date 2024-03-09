@@ -11,10 +11,10 @@ import dinning from "./../assets/img/dinning.jpg";
 function Home() {
   return (
     <><section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-      <div className="container mx-auto items-center flex flex-wrap">
+      <div className="container mx-auto items-center flex flex-wrap z-2">
         <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-          <div className="pt-32 sm:pt-0">
-            <h2 className="font-semibold text-4xl text-blueGray-600">
+          <div className="pt-26 sm:pt-0">
+            <h2 className="font-semibold text-3xl text-blueGray-600 sm:text-26">
               Happy Living - An Ultimate PG Destination.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
@@ -39,7 +39,7 @@ function Home() {
       </div>
 
       <img
-        className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
+        className="absolute top-0 b-auto right-26 pt-16 sm:w-6/12 -mt-26 sm:mt-12 w-10/12 max-h-860px"
         src={bg}
         alt="..."
       />

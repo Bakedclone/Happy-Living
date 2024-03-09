@@ -1835,6 +1835,10 @@ select {
   margin-top: -12rem;
 }
 
+.-mt-26 {
+  margin-top: 0rem;
+}
+
 .-mt-64 {
   margin-top: -16rem;
 }
@@ -2050,6 +2054,10 @@ select {
   padding-top: 0px;
 }
 
+.pt-26 {
+  padding-top: 15rem;
+}
+
 .pb-0 {
   padding-bottom: 0px;
 }
@@ -2187,6 +2195,9 @@ select {
 
 .right-0 {
   right: 0px;
+}
+.right-26 {
+  right: 27px;
 }
 
 .bottom-0 {
@@ -2662,6 +2673,10 @@ select {
     margin-top: 0px;
   }
 
+  .sm\:mt-12 {
+    margin-top: 0px;
+  }
+
   .sm\:ml-1 {
     margin-left: 0.25rem;
   }
@@ -2672,6 +2687,13 @@ select {
 
   .sm\:pt-0 {
     padding-top: 0px;
+  }
+  .sm\:pt-26 {
+    padding-top: 12px;
+  }
+  .sm\:text-26 {
+    font-size: 2.25rem;
+  line-height: 2.5rem;
   }
 
   .sm\:w-6\/12 {
